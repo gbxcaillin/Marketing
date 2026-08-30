@@ -1,0 +1,728 @@
+<title>Summit Gap Analysis</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,800;1,9..144,400&family=Source+Sans+3:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+:root {
+  --ground: #1B2438;
+  --ground-deep: #141C2D;
+  --card: #1E2A40;
+  --card-hover: #232F48;
+  --cream: #F0EBE0;
+  --cream-dim: #C4BDAE;
+  --slate: #8892A0;
+  --amber: #E8A84C;
+  --amber-soft: rgba(232, 168, 76, 0.12);
+  --coral: #D95B4E;
+  --coral-soft: rgba(217, 91, 78, 0.12);
+  --sage: #5B8C6B;
+  --sage-soft: rgba(91, 140, 107, 0.12);
+  --border: #2A3650;
+  --border-light: #243050;
+}
+
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme="dark"]) {
+    --ground: #F0EBE0;
+    --ground-deep: #E8E2D5;
+    --card: #FFFFFF;
+    --card-hover: #F8F5EE;
+    --cream: #1B2438;
+    --cream-dim: #4A5568;
+    --slate: #6B7280;
+    --amber: #C4861A;
+    --amber-soft: rgba(196, 134, 26, 0.1);
+    --coral: #C0443A;
+    --coral-soft: rgba(192, 68, 58, 0.08);
+    --sage: #3D7A50;
+    --sage-soft: rgba(61, 122, 80, 0.08);
+    --border: #D6CFBF;
+    --border-light: #E0D9CA;
+  }
+}
+
+:root[data-theme="light"] {
+  --ground: #F0EBE0;
+  --ground-deep: #E8E2D5;
+  --card: #FFFFFF;
+  --card-hover: #F8F5EE;
+  --cream: #1B2438;
+  --cream-dim: #4A5568;
+  --slate: #6B7280;
+  --amber: #C4861A;
+  --amber-soft: rgba(196, 134, 26, 0.1);
+  --coral: #C0443A;
+  --coral-soft: rgba(192, 68, 58, 0.08);
+  --sage: #3D7A50;
+  --sage-soft: rgba(61, 122, 80, 0.08);
+  --border: #D6CFBF;
+  --border-light: #E0D9CA;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: var(--ground);
+  color: var(--cream);
+  font-family: 'Source Sans 3', system-ui, sans-serif;
+  line-height: 1.6;
+  font-size: 15px;
+  -webkit-font-smoothing: antialiased;
+}
+
+.page {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 56px 24px 80px;
+}
+
+/* Header */
+.hdr {
+  margin-bottom: 48px;
+}
+
+.hdr-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--amber);
+  margin-bottom: 14px;
+}
+
+.hdr h1 {
+  font-family: 'Fraunces', Georgia, serif;
+  font-size: clamp(30px, 5vw, 42px);
+  font-weight: 700;
+  line-height: 1.15;
+  color: var(--cream);
+  margin-bottom: 16px;
+  text-wrap: balance;
+  font-optical-sizing: auto;
+}
+
+.hdr-sub {
+  color: var(--slate);
+  font-size: 16px;
+  line-height: 1.6;
+  max-width: 62ch;
+}
+
+/* Pipeline */
+.pipeline-wrap {
+  margin-bottom: 56px;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: 8px;
+}
+
+.pipeline {
+  display: flex;
+  gap: 2px;
+  min-width: 700px;
+}
+
+.pipe-stage {
+  flex: 1;
+  background: var(--card);
+  padding: 16px 14px;
+  position: relative;
+  border: 1px solid var(--border);
+}
+
+.pipe-stage:first-child { border-radius: 6px 0 0 6px; }
+.pipe-stage:last-child { border-radius: 0 6px 6px 0; }
+
+.pipe-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--slate);
+  margin-bottom: 8px;
+}
+
+.pipe-name {
+  font-family: 'Fraunces', Georgia, serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--cream);
+  line-height: 1.3;
+  margin-bottom: 6px;
+}
+
+.pipe-topics {
+  font-size: 12px;
+  color: var(--cream-dim);
+  line-height: 1.5;
+}
+
+.pipe-stage::after {
+  content: '';
+  position: absolute;
+  right: -8px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 0;
+  height: 0;
+  border-top: 6px solid transparent;
+  border-bottom: 6px solid transparent;
+  border-left: 6px solid var(--slate);
+  z-index: 1;
+}
+
+.pipe-stage:last-child::after { display: none; }
+
+/* Stats row */
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-bottom: 48px;
+}
+
+.stat {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 20px;
+  text-align: center;
+}
+
+.stat-num {
+  font-family: 'Fraunces', Georgia, serif;
+  font-size: 32px;
+  font-weight: 800;
+  line-height: 1;
+  margin-bottom: 6px;
+}
+
+.stat-num.is-sage { color: var(--sage); }
+.stat-num.is-amber { color: var(--amber); }
+.stat-num.is-coral { color: var(--coral); }
+
+.stat-label {
+  font-size: 13px;
+  color: var(--slate);
+}
+
+/* Section divider */
+.divider {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin: 48px 0 28px;
+}
+
+.divider-line {
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+
+.divider-text {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--slate);
+  white-space: nowrap;
+}
+
+/* Cards grid */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 22px 24px;
+  transition: background 0.15s;
+}
+
+.card:hover { background: var(--card-hover); }
+
+.card-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.card-title {
+  font-family: 'Fraunces', Georgia, serif;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.3;
+  color: var(--cream);
+}
+
+.badge {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: 4px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.badge.strong {
+  background: var(--sage-soft);
+  color: var(--sage);
+}
+
+.badge.partial {
+  background: var(--amber-soft);
+  color: var(--amber);
+}
+
+.badge.missing {
+  background: var(--coral-soft);
+  color: var(--coral);
+}
+
+.card-body {
+  font-size: 14px;
+  color: var(--cream-dim);
+  line-height: 1.6;
+  margin-bottom: 14px;
+}
+
+.card-detail {
+  border-top: 1px solid var(--border);
+  padding-top: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.detail-row {
+  display: flex;
+  gap: 10px;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.detail-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--slate);
+  flex-shrink: 0;
+  padding-top: 2px;
+  min-width: 52px;
+}
+
+.detail-text {
+  color: var(--cream-dim);
+}
+
+.detail-text.has { color: var(--sage); }
+.detail-text.miss { color: var(--coral); }
+
+/* Full-width cards */
+.card-full {
+  grid-column: 1 / -1;
+}
+
+/* Bottom section */
+.bottom-note {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 24px 28px;
+  margin-top: 40px;
+}
+
+.bottom-note h3 {
+  font-family: 'Fraunces', Georgia, serif;
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--cream);
+  margin-bottom: 10px;
+}
+
+.bottom-note p {
+  font-size: 14px;
+  color: var(--cream-dim);
+  line-height: 1.65;
+  max-width: 65ch;
+}
+
+.footer {
+  margin-top: 56px;
+  padding-top: 20px;
+  border-top: 1px solid var(--border);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: var(--slate);
+}
+
+@media (max-width: 600px) {
+  .page { padding: 36px 16px 60px; }
+  .stats { grid-template-columns: 1fr; }
+  .cards { grid-template-columns: 1fr; }
+  .pipeline { min-width: 560px; }
+  .pipe-stage { padding: 12px 10px; }
+}
+</style>
+
+<div class="page">
+  <header class="hdr">
+    <div class="hdr-label">Where U? Summit Curriculum Audit</div>
+    <h1>Skill Set Gap Analysis</h1>
+    <p class="hdr-sub">Mapping every skill the summit teaches against what a complete paid-ads-to-close system actually requires. Gaps are ranked by how much they'd hurt you if left unaddressed.</p>
+  </header>
+
+  <!-- Pipeline -->
+  <div class="pipeline-wrap">
+    <div class="pipeline">
+      <div class="pipe-stage">
+        <div class="pipe-label">Stage 1</div>
+        <div class="pipe-name">Who</div>
+        <div class="pipe-topics">Avatar, psychographics, Green/Red Brain, tribalism</div>
+      </div>
+      <div class="pipe-stage">
+        <div class="pipe-label">Stage 2</div>
+        <div class="pipe-name">What to say</div>
+        <div class="pipe-topics">Copywriting, hooks, CTAs, Rule of One, proof tools</div>
+      </div>
+      <div class="pipe-stage">
+        <div class="pipe-label">Stage 3</div>
+        <div class="pipe-name">How to say it</div>
+        <div class="pipe-topics">Content creation, scripts, testimonials, camouflage</div>
+      </div>
+      <div class="pipe-stage">
+        <div class="pipe-label">Stage 4</div>
+        <div class="pipe-name">Where to run it</div>
+        <div class="pipe-topics">Meta Andromeda, Google brand, creative diversity</div>
+      </div>
+      <div class="pipe-stage">
+        <div class="pipe-label">Stage 5</div>
+        <div class="pipe-name">Convert</div>
+        <div class="pipe-topics">LPs, funnels, resistance, tracking, booking</div>
+      </div>
+      <div class="pipe-stage">
+        <div class="pipe-label">Stage 6</div>
+        <div class="pipe-name">Nurture &amp; close</div>
+        <div class="pipe-topics">Sequences, show rates, sales reps, quality</div>
+      </div>
+      <div class="pipe-stage">
+        <div class="pipe-label">Stage 7</div>
+        <div class="pipe-name">Measure</div>
+        <div class="pipe-topics">A/B testing, experiments, UTMs, lead tracking</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats">
+    <div class="stat">
+      <div class="stat-num is-sage">12</div>
+      <div class="stat-label">Skills well covered</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num is-amber">5</div>
+      <div class="stat-label">Partially covered</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num is-coral">7</div>
+      <div class="stat-label">Not addressed</div>
+    </div>
+  </div>
+
+  <!-- CRITICAL GAPS -->
+  <div class="divider">
+    <span class="divider-line"></span>
+    <span class="divider-text">Critical gaps</span>
+    <span class="divider-line"></span>
+  </div>
+
+  <div class="cards">
+
+    <div class="card">
+      <div class="card-top">
+        <div class="card-title">Offer Creation &amp; Positioning</div>
+        <span class="badge missing">Missing</span>
+      </div>
+      <div class="card-body">The entire summit assumes the offer already exists. Every session teaches how to present, advertise, and convert for an offer — but none covers how to build one. Pricing, packaging, guarantees, bonuses, competitive positioning.</div>
+      <div class="card-detail">
+        <div class="detail-row"><span class="detail-label">Taught</span><span class="detail-text has">How to frame the offer in ad copy (hooks, CTAs)</span></div>
+        <div class="detail-row"><span class="detail-label">Missing</span><span class="detail-text miss">How to construct the offer itself, test pricing, build guarantees</span></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-top">
+        <div class="card-title">Budget &amp; Unit Economics</div>
+        <span class="badge missing">Missing</span>
+      </div>
+      <div class="card-body">The 3-phase process says "increase budgets on proven campaigns" but never explains how to know what you can afford per lead. No LTV:CAC calculation, no CPA target-setting, no budget allocation model.</div>
+      <div class="card-detail">
+        <div class="detail-row"><span class="detail-label">Taught</span><span class="detail-text has">When to scale (Phase 3), general principle of spending more on winners</span></div>
+        <div class="detail-row"><span class="detail-label">Missing</span><span class="detail-text miss">How to calculate target CPA, set daily budgets, model LTV:CAC ratios</span></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-top">
+        <div class="card-title">Campaign Structure &amp; Account Setup</div>
+        <span class="badge missing">Missing</span>
+      </div>
+      <div class="card-body">Andromeda explains what to put inside campaigns. Nothing explains how to structure the account: CBO vs ABO, naming conventions, how many campaigns to run, when to use Advantage+ vs manual, ad set organisation.</div>
+      <div class="card-detail">
+        <div class="detail-row"><span class="detail-label">Taught</span><span class="detail-text has">Creative diversity per ad set, audience segmentation theory</span></div>
+        <div class="detail-row"><span class="detail-label">Missing</span><span class="detail-text miss">Account architecture, campaign types, budget optimisation settings</span></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-top">
+        <div class="card-title">Google Search Campaigns</div>
+        <span class="badge partial">Partial</span>
+      </div>
+      <div class="card-body">Google ad copy and brand campaigns are covered. But the core of Google Ads — keyword research methodology, search campaign setup, match type strategy, negative keyword management, search term mining — is absent.</div>
+      <div class="card-detail">
+        <div class="detail-row"><span class="detail-label">Taught</span><span class="detail-text has">Headline/description copywriting, brand campaigns, experiments</span></div>
+        <div class="detail-row"><span class="detail-label">Missing</span><span class="detail-text miss">Keyword research, match types, search term reports, campaign setup</span></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-top">
+        <div class="card-title">Post-Sale &amp; Referral Loop</div>
+        <span class="badge missing">Missing</span>
+      </div>
+      <div class="card-body">The pipeline ends at "close." Nothing on what happens after the sale: onboarding, review generation, referral programs, upsell sequences, or retention. This is the cheapest source of new revenue and it's entirely absent.</div>
+      <div class="card-detail">
+        <div class="detail-row"><span class="detail-label">Taught</span><span class="detail-text has">Testimonial collection framework (for ad content)</span></div>
+        <div class="detail-row"><span class="detail-label">Missing</span><span class="detail-text miss">Post-sale nurture, Google review systems, referral incentives, upsells</span></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-top">
+        <div class="card-title">CRM Pipeline &amp; Sales Process</div>
+        <span class="badge partial">Partial</span>
+      </div>
+      <div class="card-body">Show rates and sales rep hiring are well covered. But the CRM pipeline itself — deal stages, lead scoring, handoff from marketing to sales, sales scripts, objection handling frameworks — is not taught.</div>
+      <div class="card-detail">
+        <div class="detail-row"><span class="detail-label">Taught</span><span class="detail-text has">Show rate targets, booking timing, rep hiring/screening</span></div>
+        <div class="detail-row"><span class="detail-label">Missing</span><span class="detail-text miss">Pipeline stages, lead scoring, sales scripts, deal tracking</span></div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- MODERATE GAPS -->
+  <div class="divider">
+    <span class="divider-line"></span>
+    <span class="divider-text">Moderate gaps</span>
+    <span class="divider-line"></span>
+  </div>
+
+  <div class="cards">
+
+    <div class="card">
+      <div class="card-top">
+        <div class="card-title">Retargeting Creative Strategy</div>
+        <span class="badge partial">Partial</span>
+      </div>
+      <div class="card-body">Custom audiences covers the data hierarchy and segmentation. But what ads to show at each retargeting layer, frequency caps, exclusion lists, and sequential storytelling aren't addressed.</div>
+      <div class="card-detail">
+        <div class="detail-row"><span class="detail-label">Taught</span><span class="detail-text has">Audience tiers, lookalikes, who to target at each level</span></div>
+        <div class="detail-row"><span class="detail-label">Missing</span><span class="detail-text miss">Stage-specific creative, frequency management, exclusion strategy</span></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-top">
+        <div class="card-title">Email Marketing &amp; Deliverability</div>
+        <span class="badge partial">Partial</span>
+      </div>
+      <div class="card-body">Nurture sequences cover the concept and GHL workflows. But email-specific craft — subject lines, deliverability, list hygiene, warm-up, inbox placement, DKIM/SPF — isn't touched.</div>
+      <div class="card-detail">
+        <div class="detail-row"><span class="detail-label">Taught</span><span class="detail-text has">Nurture types, GHL automation, logic branching, custom values</span></div>
+        <div class="detail-row"><span class="detail-label">Missing</span><span class="detail-text miss">Subject line testing, deliverability, list management, warm-up</span></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-top">
+        <div class="card-title">Reporting &amp; KPI Dashboards</div>
+        <span class="badge missing">Missing</span>
+      </div>
+      <div class="card-body">Lead quality tracking mentions UTMs and spreadsheets. But building proper dashboards, defining which KPIs to review weekly, and how to read the numbers together is not covered.</div>
+      <div class="card-detail">
+        <div class="detail-row"><span class="detail-label">Taught</span><span class="detail-text has">UTM tagging, manual lead tracker, CRM as source of truth</span></div>
+        <div class="detail-row"><span class="detail-label">Missing</span><span class="detail-text miss">Dashboard setup, KPI hierarchy, automated reporting, data interpretation</span></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-top">
+        <div class="card-title">Video &amp; Image Production</div>
+        <span class="badge partial">Partial</span>
+      </div>
+      <div class="card-body">Scripts, testimonial frameworks, and image-vs-video strategy are well covered. But the actual production — lighting, equipment, editing, batch workflows, sizing for placements, thumbnail design — is not.</div>
+      <div class="card-detail">
+        <div class="detail-row"><span class="detail-label">Taught</span><span class="detail-text has">Script frameworks, testimonial questions, camouflage principles</span></div>
+        <div class="detail-row"><span class="detail-label">Missing</span><span class="detail-text miss">Equipment, filming technique, editing workflow, asset specs</span></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-top">
+        <div class="card-title">Ad Policy &amp; Compliance</div>
+        <span class="badge missing">Missing</span>
+      </div>
+      <div class="card-body">No coverage of Meta or Google ad policies, common disapprovals, restricted categories, what gets accounts suspended, or how to write compliant copy in regulated industries (health, finance, legal).</div>
+      <div class="card-detail">
+        <div class="detail-row"><span class="detail-label">Taught</span><span class="detail-text has">Nothing specific</span></div>
+        <div class="detail-row"><span class="detail-label">Missing</span><span class="detail-text miss">Policy dos/don'ts, common rejections, restricted categories, appeals</span></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-top">
+        <div class="card-title">Landing Page Copywriting</div>
+        <span class="badge partial">Partial</span>
+      </div>
+      <div class="card-body">LP optimisation covers layout principles and the remove-doubt philosophy. But there's no section-by-section copywriting framework for the page itself — above-fold formula, social proof placement, VSL script structure for the page (not the ad).</div>
+      <div class="card-detail">
+        <div class="detail-row"><span class="detail-label">Taught</span><span class="detail-text has">Momentum principle, mobile-first, FAQ placement, doubt removal</span></div>
+        <div class="detail-row"><span class="detail-label">Missing</span><span class="detail-text miss">Section-by-section LP copy formula, above-fold framework, VSL page script</span></div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- WELL COVERED -->
+  <div class="divider">
+    <span class="divider-line"></span>
+    <span class="divider-text">Well covered by the summit</span>
+    <span class="divider-line"></span>
+  </div>
+
+  <div class="cards">
+
+    <div class="card">
+      <div class="card-top">
+        <div class="card-title">Customer Avatar &amp; Psychographics</div>
+        <span class="badge strong">Strong</span>
+      </div>
+      <div class="card-body">Thorough coverage across multiple sessions: avatar speedrun, towards/away motivators, Green Brain vs Red Brain, tribalism, neuromarketing (50/30/20 decision split), emotional messaging framework, mirroring language.</div>
+    </div>
+
+    <div class="card">
+      <div class="card-top">
+        <div class="card-title">Ad Copywriting (Meta &amp; Google)</div>
+        <span class="badge strong">Strong</span>
+      </div>
+      <div class="card-body">Two dedicated sessions plus principles woven through others. Rule of One, hook writing (imply, exclude, curiosity), body proof tools, CTA formula, Google headline/description structure, emotional/logical/emotional framework.</div>
+    </div>
+
+    <div class="card">
+      <div class="card-top">
+        <div class="card-title">Content &amp; Creative Strategy</div>
+        <span class="badge strong">Strong</span>
+      </div>
+      <div class="card-body">Camouflaging ads, 3-step video script framework, testimonial 2.0, image vs video, competitor research via Ad Library, creative diversity roadmap with messaging pillars, Andromeda algorithm mechanics.</div>
+    </div>
+
+    <div class="card">
+      <div class="card-top">
+        <div class="card-title">Landing Page Design Principles</div>
+        <span class="badge strong">Strong</span>
+      </div>
+      <div class="card-body">Momentum principle, remove doubt vs increase desire, mobile-first, consistent branding, split by service/audience, FAQ placement, website vs LP distinction. Clear philosophy even if the copywriting formula is light.</div>
+    </div>
+
+    <div class="card">
+      <div class="card-top">
+        <div class="card-title">Conversions &amp; Funnel Mechanics</div>
+        <span class="badge strong">Strong</span>
+      </div>
+      <div class="card-body">Physical vs psychological resistance, one-step vs two-step funnels, speed-to-lead, booking rules (3-day window, 15-min slots), reminder cadence, quality vs quantity seesaw, Microsoft Clarity.</div>
+    </div>
+
+    <div class="card">
+      <div class="card-top">
+        <div class="card-title">Nurture Sequences</div>
+        <span class="badge strong">Strong</span>
+      </div>
+      <div class="card-body">Three distinct types (notificational, lead, sales) with clear jobs. GHL logic branching, custom values, awareness spectrum positioning. Conceptually complete — email-specific execution is the gap.</div>
+    </div>
+
+    <div class="card">
+      <div class="card-top">
+        <div class="card-title">A/B Testing (All Platforms)</div>
+        <span class="badge strong">Strong</span>
+      </div>
+      <div class="card-body">Three dedicated sessions covering GHL split testing, Meta Experiments, and Google Experiments. Consistent principles: one variable, statistical significance, 30-day minimum, what to test vs what not to test.</div>
+    </div>
+
+    <div class="card">
+      <div class="card-top">
+        <div class="card-title">Show Rates &amp; Sales Operations</div>
+        <span class="badge strong">Strong</span>
+      </div>
+      <div class="card-body">70% target, morning booking strategy, rep hiring via lead ads, mock call + ethics screening, scaling playbook (fill one calendar first). Practical and immediately actionable.</div>
+    </div>
+
+    <div class="card">
+      <div class="card-top">
+        <div class="card-title">Lead Quality Tracking</div>
+        <span class="badge strong">Strong</span>
+      </div>
+      <div class="card-body">UTM parameters, lead tracker spreadsheet, AI call transcript review, staged review cadence (weekly then biweekly). Closes the loop between ads and revenue — the dashboard/reporting layer is the gap.</div>
+    </div>
+
+    <div class="card">
+      <div class="card-top">
+        <div class="card-title">3-Phase Launch Framework</div>
+        <span class="badge strong">Strong</span>
+      </div>
+      <div class="card-body">Clear 90-day structure: data gathering (0-30), optimisation (30-60), scaling (60-90+). Platform-specific actions at each phase. Gives beginners a timeline they can follow without guessing.</div>
+    </div>
+
+    <div class="card">
+      <div class="card-top">
+        <div class="card-title">Marketing Psychology</div>
+        <span class="badge strong">Strong</span>
+      </div>
+      <div class="card-body">Naive realism, constructing sufficient reasons, skepticism ads, Reddit testing, negativity bias, "join the conversation in their head." Woven through multiple sessions rather than isolated — which makes it stick.</div>
+    </div>
+
+    <div class="card">
+      <div class="card-top">
+        <div class="card-title">Organic Content</div>
+        <span class="badge strong">Strong</span>
+      </div>
+      <div class="card-body">3 E's framework, frequency guidance, reuse-as-ads strategy, brand vs performance distinction, channel focus. Light but complete enough — organic isn't the summit's primary scope.</div>
+    </div>
+
+  </div>
+
+  <!-- Summary -->
+  <div class="bottom-note">
+    <h3>Where this leaves you</h3>
+    <p>The summit is strongest on the creative and strategic side of the pipeline — knowing your customer, writing compelling copy, and building content that doesn't look like an ad. It's weakest on the operational and financial side — structuring accounts, setting budgets, building the offer itself, and what happens after the sale. The biggest single gap is <strong>offer creation</strong>: every other skill amplifies an offer that already works, but none of them can save an offer that doesn't. The second biggest is <strong>budget and unit economics</strong>: without knowing your CPA target, you can't tell whether a campaign is winning or losing money.</p>
+  </div>
+
+  <footer class="footer">
+    Gap analysis of Where U? Summit curriculum &mdash; 22 slide decks assessed
+  </footer>
+</div>
