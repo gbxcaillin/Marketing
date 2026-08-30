@@ -1,0 +1,805 @@
+<title>Where U? Summit Playbook</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Space+Mono:wght@400;700&display=swap');
+
+:root {
+  --bg: #F7F6F2;
+  --bg-card: #FFFFFF;
+  --bg-accent: #EDE9DF;
+  --text: #1A1714;
+  --text-secondary: #6B6459;
+  --text-muted: #9C9488;
+  --accent: #C45D2C;
+  --accent-soft: rgba(196, 93, 44, 0.08);
+  --border: #E2DED6;
+  --border-light: #EDEBE5;
+  --tag-bg: #E8E4DA;
+  --tag-text: #5A5347;
+  --shadow: 0 1px 3px rgba(26, 23, 20, 0.06);
+  --shadow-hover: 0 4px 12px rgba(26, 23, 20, 0.1);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #161412;
+    --bg-card: #1E1C19;
+    --bg-accent: #252219;
+    --text: #E8E4DC;
+    --text-secondary: #A09888;
+    --text-muted: #706858;
+    --accent: #D4764A;
+    --accent-soft: rgba(212, 118, 74, 0.1);
+    --border: #2E2A24;
+    --border-light: #262320;
+    --tag-bg: #2A2620;
+    --tag-text: #B0A898;
+    --shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+    --shadow-hover: 0 4px 12px rgba(0, 0, 0, 0.4);
+  }
+}
+
+:root[data-theme="dark"] {
+  --bg: #161412;
+  --bg-card: #1E1C19;
+  --bg-accent: #252219;
+  --text: #E8E4DC;
+  --text-secondary: #A09888;
+  --text-muted: #706858;
+  --accent: #D4764A;
+  --accent-soft: rgba(212, 118, 74, 0.1);
+  --border: #2E2A24;
+  --border-light: #262320;
+  --tag-bg: #2A2620;
+  --tag-text: #B0A898;
+  --shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  --shadow-hover: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'DM Sans', system-ui, -apple-system, sans-serif;
+  line-height: 1.65;
+  font-size: 15px;
+  -webkit-font-smoothing: antialiased;
+}
+
+.page {
+  max-width: 820px;
+  margin: 0 auto;
+  padding: 48px 24px 80px;
+}
+
+.header {
+  margin-bottom: 56px;
+  padding-bottom: 40px;
+  border-bottom: 1px solid var(--border);
+}
+
+.header-eyebrow {
+  font-family: 'Space Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 16px;
+}
+
+.header h1 {
+  font-size: clamp(28px, 5vw, 38px);
+  font-weight: 700;
+  line-height: 1.15;
+  color: var(--text);
+  margin-bottom: 16px;
+  text-wrap: balance;
+}
+
+.header-meta {
+  font-size: 14px;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+.toc {
+  background: var(--bg-card);
+  border: 1px solid var(--border-light);
+  border-radius: 8px;
+  padding: 24px 28px;
+  margin-bottom: 56px;
+  box-shadow: var(--shadow);
+}
+
+.toc-title {
+  font-family: 'Space Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 16px;
+}
+
+.toc-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 6px 24px;
+}
+
+.toc a {
+  display: block;
+  font-size: 14px;
+  color: var(--text-secondary);
+  text-decoration: none;
+  padding: 4px 0;
+  transition: color 0.15s;
+}
+
+.toc a:hover, .toc a:focus-visible {
+  color: var(--accent);
+  outline: none;
+}
+
+.toc a .toc-num {
+  font-family: 'Space Mono', monospace;
+  font-size: 11px;
+  color: var(--text-muted);
+  margin-right: 6px;
+}
+
+.section {
+  margin-bottom: 56px;
+}
+
+.section-header {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  margin-bottom: 20px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border-light);
+}
+
+.section-header h2 {
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1.3;
+  color: var(--text);
+}
+
+.speaker-tag {
+  font-family: 'Space Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.05em;
+  background: var(--tag-bg);
+  color: var(--tag-text);
+  padding: 3px 10px;
+  border-radius: 4px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.section p {
+  color: var(--text-secondary);
+  margin-bottom: 14px;
+  max-width: 65ch;
+}
+
+.section p:last-child { margin-bottom: 0; }
+
+.key-points {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 16px 0;
+}
+
+.kp {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  padding: 14px 16px;
+  background: var(--bg-accent);
+  border-radius: 6px;
+  font-size: 14px;
+  color: var(--text);
+  line-height: 1.55;
+}
+
+.kp-marker {
+  flex-shrink: 0;
+  width: 6px;
+  height: 6px;
+  margin-top: 8px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+
+.kp strong {
+  font-weight: 600;
+}
+
+.callout {
+  background: var(--accent-soft);
+  border-left: 3px solid var(--accent);
+  padding: 16px 20px;
+  border-radius: 0 6px 6px 0;
+  margin: 20px 0;
+  font-size: 14px;
+  color: var(--text);
+  line-height: 1.6;
+}
+
+.callout strong {
+  font-weight: 600;
+  color: var(--accent);
+}
+
+.subsection {
+  margin-top: 24px;
+}
+
+.subsection h3 {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 10px;
+}
+
+.footer {
+  margin-top: 64px;
+  padding-top: 24px;
+  border-top: 1px solid var(--border-light);
+  font-size: 12px;
+  color: var(--text-muted);
+  font-family: 'Space Mono', monospace;
+}
+
+@media (max-width: 600px) {
+  .page { padding: 32px 16px 60px; }
+  .section-header { flex-direction: column; gap: 6px; }
+  .toc-grid { grid-template-columns: 1fr; }
+  .toc { padding: 20px; }
+  .kp { padding: 12px 14px; }
+}
+</style>
+
+<div class="page">
+  <header class="header">
+    <div class="header-eyebrow">Where U? Member Summit</div>
+    <h1>Marketing Summit Playbook</h1>
+    <div class="header-meta">
+      22 presentations covering paid ads, organic content, copywriting, landing pages, conversions, nurture sequences, customer avatars, A/B testing, creative diversity, and sales operations. Compiled from sessions by Brandon, Tiarna, Raj, Sophie, Patsy, Iszy, and Ciara.
+    </div>
+  </header>
+
+  <nav class="toc">
+    <div class="toc-title">Contents</div>
+    <div class="toc-grid">
+      <a href="#intro"><span class="toc-num">01</span> Summit Intro &amp; Mindset</a>
+      <a href="#avatar"><span class="toc-num">02</span> Customer Avatar &amp; Green Brain</a>
+      <a href="#content"><span class="toc-num">03</span> Ads: Content Creation</a>
+      <a href="#copywriting"><span class="toc-num">04</span> Copywriting: Meta &amp; Google</a>
+      <a href="#andromeda"><span class="toc-num">05</span> Meta Andromeda &amp; Creative Diversity</a>
+      <a href="#conversions"><span class="toc-num">06</span> Conversions &amp; Funnels</a>
+      <a href="#landing-pages"><span class="toc-num">07</span> Landing Page Optimisation</a>
+      <a href="#psychographics"><span class="toc-num">08</span> Neuromarketing &amp; Psychographics</a>
+      <a href="#three-phase"><span class="toc-num">09</span> 3-Phase Ad Process</a>
+      <a href="#audiences"><span class="toc-num">10</span> Custom Audiences &amp; Targeting</a>
+      <a href="#debating"><span class="toc-num">11</span> Marketing as Debating</a>
+      <a href="#nurture"><span class="toc-num">12</span> Nurture Sequences</a>
+      <a href="#ab-testing"><span class="toc-num">13</span> A/B Testing: GHL &amp; Meta</a>
+      <a href="#google-experiments"><span class="toc-num">14</span> Google Experiments</a>
+      <a href="#google-brand"><span class="toc-num">15</span> Google Brand Campaigns</a>
+      <a href="#lead-quality"><span class="toc-num">16</span> Lead Quality Tracking</a>
+      <a href="#organic"><span class="toc-num">17</span> Organic Content</a>
+      <a href="#show-rates"><span class="toc-num">18</span> Show Rates &amp; Sales Reps</a>
+      <a href="#identity"><span class="toc-num">19</span> Identity &amp; Growth</a>
+    </div>
+  </nav>
+
+  <!-- 1. Summit Intro -->
+  <div class="section" id="intro">
+    <div class="section-header">
+      <h2>Summit Intro &amp; Mindset</h2>
+      <span class="speaker-tag">Brandon</span>
+    </div>
+    <p>The summit opens with goal-setting and framing digital advertising as a poker table where "you can count cards and the dealer wants you to win." The emphasis is on giving yourself both a selfish and an unselfish reason to succeed.</p>
+
+    <div class="key-points">
+      <div class="kp"><span class="kp-marker"></span><span><strong>Two reasons to win</strong> — set a selfish goal (income, lifestyle) and an unselfish one (family, team, community). The unselfish reason is what keeps you going when things get hard.</span></div>
+      <div class="kp"><span class="kp-marker"></span><span><strong>Customer journey narrative</strong> — from "Funnel Daydreamer" (thinking about ads) to having a full system running. The summit maps each step of this journey.</span></div>
+      <div class="kp"><span class="kp-marker"></span><span><strong>Digital advertising = gambling where the dealer wants you to win</strong> — Meta and Google profit when your ads succeed, so the platforms are incentivised to help you. Learn their rules and the odds tilt in your favour.</span></div>
+      <div class="kp"><span class="kp-marker"></span><span><strong>Ads are art vs science</strong> — frameworks give you structure, but there are no hard and fast rules. Everything works to some degree; the job is finding what works best for your niche.</span></div>
+    </div>
+  </div>
+
+  <!-- 2. Customer Avatar -->
+  <div class="section" id="avatar">
+    <div class="section-header">
+      <h2>Customer Avatar &amp; Green Brain</h2>
+      <span class="speaker-tag">Brandon</span>
+    </div>
+    <p>"Nobody knows the ideal customer better than the business owner." The customer avatar goes beyond demographics into what makes someone move — their fears, desires, and the language they use to describe both.</p>
+
+    <div class="subsection">
+      <h3>Avatar Speedrun</h3>
+      <div class="key-points">
+        <div class="kp"><span class="kp-marker"></span><span><strong>Away From &amp; Towards</strong> — map what your customer is running from (pain, fear, frustration) and running towards (outcome, aspiration, relief). Like Tom &amp; Jerry: the cat pushes and the cheese pulls.</span></div>
+        <div class="kp"><span class="kp-marker"></span><span><strong>Tribalism</strong> — people identify with groups. Position your offer as belonging to a tribe they want to join, and against the tribe they want to leave.</span></div>
+      </div>
+    </div>
+
+    <div class="subsection">
+      <h3>Red Brain vs Green Brain</h3>
+      <div class="key-points">
+        <div class="kp"><span class="kp-marker"></span><span><strong>Red Brain (feature-focused)</strong> — "How to do Facebook Ads," "10 tips for better SEO." Logical, process-oriented. This is what most marketers default to.</span></div>
+        <div class="kp"><span class="kp-marker"></span><span><strong>Green Brain (benefit-focused)</strong> — "How to never rely on word of mouth again," "Stop losing customers to your competitors." Emotional, outcome-oriented. This is what stops the scroll.</span></div>
+      </div>
+    </div>
+
+    <div class="callout">
+      <strong>Green Brain Roadmap:</strong> What it is &rarr; The result it delivers &rarr; The emotional effect of that result. Write Green Brain headlines with Red Brain sub-headlines underneath.
+    </div>
+  </div>
+
+  <!-- 3. Ads: Content -->
+  <div class="section" id="content">
+    <div class="section-header">
+      <h2>Ads: Content Creation</h2>
+      <span class="speaker-tag">Tiarna</span>
+    </div>
+    <p>The number one rule of ad content: don't make your ad look like an ad. No logos, no brand intros, no "Hey, I'm [Name] from [Company]." People scroll past ads — they stop for content that speaks to them.</p>
+
+    <div class="subsection">
+      <h3>Camouflaging Ads</h3>
+      <div class="key-points">
+        <div class="kp"><span class="kp-marker"></span><span><strong>Lead with "what's in it for me"</strong> — the viewer doesn't care about your brand yet. They care about their problem. Open with the problem or the promise.</span></div>
+        <div class="kp"><span class="kp-marker"></span><span><strong>Images are the exception</strong> — image ads are absorbed instantly. They work differently from video; treat them as a separate format, not a lesser one.</span></div>
+        <div class="kp"><span class="kp-marker"></span><span><strong>Silent ads can work</strong> — a 48-second video of Brandon sitting in silence playing with a microphone generated 12 leads at $16.48/lead. Pattern interrupts outperform polished content.</span></div>
+      </div>
+    </div>
+
+    <div class="subsection">
+      <h3>Writing Video Scripts</h3>
+      <div class="key-points">
+        <div class="kp"><span class="kp-marker"></span><span><strong>3-step framework:</strong> (1) Stop the right person scrolling, (2) Prove your point, (3) Tell them what to do next.</span></div>
+        <div class="kp"><span class="kp-marker"></span><span><strong>Competitor research</strong> — use Meta Ad Library to steal inspiration. Search competitors, see what they're running, adapt their angles for your niche.</span></div>
+      </div>
+    </div>
+
+    <div class="subsection">
+      <h3>Testimonial Framework 2.0</h3>
+      <div class="key-points">
+        <div class="kp"><span class="kp-marker"></span><span><strong>8-step interview sequence:</strong> (1) Introduce yourself, (2) Before/problem state, (3) Hesitations &amp; reasons for buying, (4) What changed/the solution, (5) What they loved most, (6) After state, (7) Personal/professional effect, (8) "If anyone watching is unsure about booking a call, what would you tell them?"</span></div>
+        <div class="kp"><span class="kp-marker"></span><span><strong>Testimonial VSL variant</strong> — instead of you selling on camera, record an interview with your best customer following this framework. Let the customer do the convincing.</span></div>
+      </div>
+    </div>
+
+    <div class="subsection">
+      <h3>Image vs Video</h3>
+      <div class="key-points">
+        <div class="kp"><span class="kp-marker"></span><span>52% of marketers use video, and 60% agree video gets more engagement — but image ads are easier, cheaper, and can be optimised. Carousel ads combine the simplicity of images with the eye-catching nature of video.</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4. Copywriting -->
+  <div class="section" id="copywriting">
+    <div class="section-header">
+      <h2>Copywriting: Meta &amp; Google</h2>
+      <span class="speaker-tag">Brandon</span>
+    </div>
+    <p>"Your ad sells the click, not the product." The ad's only job is to get someone to the landing page. Don't try to close the sale in the ad copy.</p>
+
+    <div class="subsection">
+      <h3>Meta Ads Structure</h3>
+      <div class="key-points">
+        <div class="kp"><span class="kp-marker"></span><span><strong>Three interchangeable frameworks:</strong> Hook/Story/Offer, Hook/Body/CTA, or Emotional/Logical/Emotional. All follow the same rhythm: grab, prove, direct.</span></div>
+        <div class="kp"><span class="kp-marker"></span><span><strong>Rule of One</strong> — one idea, one promise, one story, one emotion, one CTA. Multiple messages compete with each other and dilute everything.</span></div>
+      </div>
+    </div>
+
+    <div class="subsection">
+      <h3>Writing Hooks</h3>
+      <div class="key-points">
+        <div class="kp"><span class="kp-marker"></span><span><strong>Good hooks imply who it's for</strong> — "Attention Perth homeowners" is explicit. "Sick of dodgy tradies?" is implied. Implied hooks outperform because they feel personal, not broadcast.</span></div>
+        <div class="kp"><span class="kp-marker"></span><span><strong>Imply who it's NOT for</strong> — exclusion creates curiosity. "This isn't for businesses that are already booked out" makes everyone else lean in.</span></div>
+        <div class="kp"><span class="kp-marker"></span><span><strong>Pique curiosity</strong> — the hook should open a loop the reader needs to close. Don't give the answer; promise one.</span></div>
+      </div>
+    </div>
+
+    <div class="subsection">
+      <h3>Body Copy Proof Tools</h3>
+      <div class="key-points">
+        <div class="kp"><span class="kp-marker"></span><span><strong>6 tools:</strong> Urgency (limited time), Scarcity (limited supply), Social Proof (testimonials, numbers), Authority (credentials, media), Familiar Language (mirror their words), Benefits over features.</span></div>
+      </div>
+    </div>
+
+    <div class="subsection">
+      <h3>CTAs &amp; Headlines</h3>
+      <div class="key-points">
+        <div class="kp"><span class="kp-marker"></span><span><strong>CTA formula:</strong> Action + emotional benefit. "Book your free quote and stop worrying about dodgy tradies" beats "Click here to learn more."</span></div>
+        <div class="kp"><span class="kp-marker"></span><span><strong>Meta headlines:</strong> 28-character limit, green brain language, pique curiosity. The headline appears below the image — it's the last thing before the click.</span></div>
+      </div>
+    </div>
+
+    <div class="subsection">
+      <h3>Google Ads Copywriting</h3>
+      <div class="key-points">
+        <div class="kp"><span class="kp-marker"></span><span><strong>Headline 1 (x2-4):</strong> Your service name — "Garage Door Installation," "Quality Garage Door Install."</span></div>
+        <div class="kp"><span class="kp-marker"></span><span><strong>Headline 2 (x2-4):</strong> Shortened hook/motivator — "Skip The Renovation Disaster," "No Dodgy Technicians," "Hassle-Free Service."</span></div>
+        <div class="kp"><span class="kp-marker"></span><span><strong>Headline 3 (x2-4):</strong> Shortened CTA — "Get a Free Quote," "Generate Your Free Quote."</span></div>
+        <div class="kp"><span class="kp-marker"></span><span><strong>Description 1:</strong> Shortened hook (towards or away from motivator), max 90 chars.</span></div>
+        <div class="kp"><span class="kp-marker"></span><span><strong>Description 2:</strong> Simplified body — justify why your company is the best, max 90 chars.</span></div>
+      </div>
+    </div>
+
+    <div class="callout">
+      <strong>Short-form Meta framework:</strong> Headline 1 = Your service (x2-4), Headline 2 = Stop them with your point (x2-4), Headline 3 = CTA (x2-4), Description 1 = Expand on your point (x1-2), Description 2 = Justify your point (x1-2).
+    </div>
+  </div>
+
+  <!-- 5. Andromeda & Creative Diversity -->
+  <div class="section" id="andromeda">
+    <div class="section-header">
+      <h2>Meta Andromeda &amp; Creative Diversity</h2>
+      <span class="speaker-tag">Brandon / Patsy</span>
+    </div>
+    <p>Meta's Andromeda algorithm update introduced a retrieval layer before the ad auction. It now rewards creative diversity — the system evaluates each ad independently, so more unique creatives means more chances to win auctions at lower cost.</p>
+
+    <div class="key-points">
+      <div class="kp"><span class="kp-marker"></span><span><strong>10-15 unique ads per ad set (minimum)</strong> — "unique" means unique reasons, unique transcript start to finish, and completely unique ad copy. Duplicating and changing the first sentence no longer works.</span></div>
+      <div class="kp"><span class="kp-marker"></span><span><strong>Curious vs Committed language</strong> — ad copy determines lead quality. "How my clients grow their revenue" (committed) attracts hotter leads than "How businesses grow" (curious). Choose based on your sales capacity.</span></div>
+      <div class="kp"><span class="kp-marker"></span><span><strong>Negativity bias</strong> — people are naturally skeptical. Frame messaging so readers "disagree in the right direction." Use doubt constructively to pull attention.</span></div>
+      <div class="kp"><span class="kp-marker"></span><span><strong>Budget concentrates naturally</strong> — most spend will flow to 1-2 winners. Keep all ads running; Meta needs the variety to find winners. Never judge an ad set by its weakest performer.</span></div>
+    </div>
+
+    <div class="subsection">
+      <h3>Creative Diversity Roadmap</h3>
+      <div class="key-points">
+        <div class="kp"><span class="kp-marker"></span><span><strong>Step 1: Audit</strong> — review existing ads. How many truly unique concepts do you have? Most accounts have 2-3 ideas repeated with slight variations.</span></div>
+        <div class="kp"><span class="kp-marker"></span><span><strong>Step 2: Segment into messaging pillars</strong> — group your value props into distinct themes (e.g., speed, quality, trust, price, results). Each pillar should feel like a different conversation.</span></div>
+        <div class="kp"><span class="kp-marker"></span><span><strong>Step 3: 6-10 unique concepts per pillar</strong> — each concept has its own angle, script, visual approach, and copy. This is where most people underinvest.</span></div>
+      </div>
+    </div>
+
+    <div class="callout">
+      <strong>What no longer works:</strong> Duplicating your ad and changing the first sentence slightly. Duplicating the video and changing the first 3 seconds. Running only 2 or 3 ads.
+    </div>
+  </div>
+
+  <!-- 6. Conversions & Funnels -->
+  <div class="section" id="conversions">
+    <div class="section-header">
+      <h2>Conversions &amp; Funnels</h2>
+      <span class="speaker-tag">Brandon</span>
+    </div>
+    <p>The full pipeline is Clicks &rarr; Conversions &rarr; Close. Most people obsess over clicks and ignore the conversion layer — the part where a visitor becomes a lead and a lead becomes a booking.</p>
+
+    <div class="subsection">
+      <h3>Two Types of Resistance</h3>
+      <div class="key-points">
+        <div class="kp"><span class="kp-marker"></span><span><strong>Physical resistance</strong> — every click, keystroke, and scroll is friction. Reduce steps ruthlessly. Amazon's "one-click buy" patent existed because Bezos understood this.</span></div>
+        <div class="kp"><span class="kp-marker"></span><span><strong>Psychological resistance</strong> — trust, purchase intent, and cognitive load. The landing page's job is to lower all three.</span></div>
+      </div>
+    </div>
+
+    <div class="subsection">
+      <h3>Funnel Types</h3>
+      <div class="key-points">
+        <div class="kp"><span class="kp-marker"></span><span><strong>One-step funnel (e.g., form &rarr; call):</strong> Speed is everything. Call the lead within 5 minutes. Automate the first communication. The longer you wait, the colder they get.</span></div>
+        <div class="kp"><span class="kp-marker"></span><span><strong>Two-step funnel (e.g., form &rarr; booking &rarr; call):</strong> Limit booking availability to the next 3 days. Wider windows create procrastination and no-shows.</span></div>
+      </div>
+    </div>
+
+    <div class="subsection">
+      <h3>Attendance &amp; Booking Rules</h3>
+      <div class="key-points">
+        <div class="kp"><span class="kp-marker"></span><span><strong>Book today/tomorrow/day-after only</strong> — urgency drives attendance. Letting someone book 2 weeks out guarantees they'll forget.</span></div>
+        <div class="kp"><span class="kp-marker"></span><span><strong>15-minute slots</strong> — shorter slots feel less committal. The actual call can run longer, but the booking psychology matters.</span></div>
+        <div class="kp"><span class="kp-marker"></span><span><strong>Reminder cadence:</strong> Booking confirmation &rarr; 24hrs before &rarr; 1hr before &rarr; 30min before. Each touchpoint reduces no-shows.</span></div>
+      </div>
+    </div>
+
+    <div class="subsection">
+      <h3>Conversion Tracking</h3>
+      <div class="key-points">
+        <div class="kp"><span class="kp-marker"></span><span><strong>Events to track:</strong> One-step funnel = Leads. Two-step funnel = Leads + Schedules. Set up when landing pages are done.</span></div>
+        <div class="kp"><span class="kp-marker"></span><span><strong>It's not perfect</strong> (especially post iOS 14). Always refer to your CRM for true conversion data. You can make tracking more accurate but it's expensive and complicated — not worth it under $20K/month ad spend.</span></div>
+        <div class="kp"><span class="kp-marker"></span><span><strong>Quality vs Quantity seesaw</strong> — making things too easy (fewer form fields, broader targeting) increases volume but can hurt lead quality. Find the balance point for your niche.</span></div>
+        <div class="kp"><span class="kp-marker"></span><span><strong>Microsoft Clarity</strong> — free tool (better and faster than HotJar) that records screen sessions of every visitor. Watch recordings to get qualitative feedback on user behaviour.</span></div>
+      </div>
+    </div>
+
+    <div class="callout">
+      <strong>Speed kills sales:</strong> Automate the first communication. If you can't call within 5 minutes, at least send an automated text/email that acknowledges their enquiry and sets expectations.
+    </div>
+  </div>
+
+  <!-- 7. Landing Page Optimisation -->
+  <div class="section" id="landing-pages">
+    <div class="section-header">
+      <h2>Landing Page Optimisation</h2>
+      <span class="speaker-tag">Iszy</span>
+    </div>
+    <p>People scan, they don't read. Every element on the page either builds momentum toward the CTA or creates friction. The goal is to remove doubt more than increase desire.</p>
+
+    <div class="key-points">
+      <div class="kp"><span class="kp-marker"></span><span><strong>Momentum principle</strong> — headline catches attention &rarr; subheadline builds interest &rarr; CTA captures action. Every scroll should move the visitor closer, not sideways.</span></div>
+      <div class="kp"><span class="kp-marker"></span><span><strong>Remove doubt &gt; increase desire</strong> — most visitors already have some interest (they clicked the ad). Your job is to eliminate the reasons they'd leave, not hype them further.</span></div>
+      <div class="kp"><span class="kp-marker"></span><span><strong>Mobile-first</strong> — design for mobile, then adapt for desktop. Most traffic comes from Meta mobile placements.</span></div>
+      <div class="kp"><span class="kp-marker"></span><span><strong>Consistent branding</strong> — the LP should feel like an extension of the ad. Colour, tone, imagery must match or trust breaks immediately.</span></div>
+      <div class="kp"><span class="kp-marker"></span><span><strong>Reduce text ruthlessly</strong> — if a section doesn't directly address an objection or build credibility, cut it. Long pages aren't bad; unfocused pages are.</span></div>
+      <div class="kp"><span class="kp-marker"></span><span><strong>Split LPs by service/audience</strong> — one page per offer per audience. A generic "all services" page converts worse than targeted variants.</span></div>
+      <div class="kp"><span class="kp-marker"></span><span><strong>FAQs higher up</strong> — objection handling belongs mid-page, not buried at the bottom.</span></div>
+      <div class="kp"><span class="kp-marker"></span><span><strong>Images reduce cognitive load</strong> — add relevant images and sections below the VSL. Thank you pages boost show rates.</span></div>
+      <div class="kp"><span class="kp-marker"></span><span><strong>Websites vs Landing Pages</strong> — a website is essentialism gone wrong (too many paths). A landing page is Jiro-style focus: one job, done perfectly.</span></div>
+    </div>
+  </div>
+
+  <!-- 8. Customer Psychographics -->
+  <div class="section" id="psychographics">
+    <div class="section-header">
+      <h2>Neuromarketing &amp; Psychographics</h2>
+      <span class="speaker-tag">Patsy</span>
+    </div>
+    <p>Understanding not just <em>who</em> your customer is (demographics) but <em>why</em> they buy. 95% of purchasing decisions are subconscious — messaging must reach the emotional brain before the logical one.</p>
+
+    <div class="callout">
+      <strong>Decision breakdown:</strong> 50% emotion, 30% process, 20% logic. Lead with feeling, structure the journey, close with reason.
+    </div>
+
+    <div class="key-points">
+      <div class="kp"><span class="kp-marker"></span><span><strong>Towards vs Away motivators</strong> — people move towards pleasure or away from pain. Identify which drives your avatar: "I want financial freedom" (towards) vs "I can't keep living paycheck to paycheck" (away).</span></div>
+      <div class="kp"><span class="kp-marker"></span><span><strong>Customer avatar definition</strong> — go beyond age/location. Map their daily frustrations, aspirations, the language they use, and the emotional state they're in when they first encounter your ad.</span></div>
+      <div class="kp"><span class="kp-marker"></span><span><strong>Emotional messaging framework</strong> — write ads that name the feeling, not just the problem. "Tired of being overlooked" hits harder than "Grow your business."</span></div>
+      <div class="kp"><span class="kp-marker"></span><span><strong>Mirror their language</strong> — use the exact words your audience uses in testimonials, reviews, and intake forms. Their vocabulary is your best copywriting tool.</span></div>
+    </div>
+  </div>
+
+  <!-- 9. 3-Phase Ad Process -->
+  <div class="section" id="three-phase">
+    <div class="section-header">
+      <h2>3-Phase Ad Process</h2>
+      <span class="speaker-tag">Raj</span>
+    </div>
+    <p>A structured 90-day framework for launching and scaling paid campaigns across Google and Meta, with specific landing page work at each stage.</p>
+
+    <div class="subsection">
+      <h3>Phase 1: Data Gathering (Days 0-30)</h3>
+      <div class="key-points">
+        <div class="kp"><span class="kp-marker"></span><span>Launch initial campaigns to collect data. Don't optimise yet — you're buying information.</span></div>
+        <div class="kp"><span class="kp-marker"></span><span><strong>Meta:</strong> Broad targeting, multiple creatives. Let the algorithm learn.</span></div>
+        <div class="kp"><span class="kp-marker"></span><span><strong>Google:</strong> Build keyword lists, set up search campaigns, gather search term reports.</span></div>
+        <div class="kp"><span class="kp-marker"></span><span><strong>Landing pages:</strong> Use a baseline page. Track heatmaps and scroll depth for Phase 2.</span></div>
+      </div>
+    </div>
+
+    <div class="subsection">
+      <h3>Phase 2: Optimisation (Days 30-60)</h3>
+      <div class="key-points">
+        <div class="kp"><span class="kp-marker"></span><span>Cut underperforming ads and keywords. Double down on what's working.</span></div>
+        <div class="kp"><span class="kp-marker"></span><span>Refine audience targeting based on actual conversion data.</span></div>
+        <div class="kp"><span class="kp-marker"></span><span>Start A/B testing landing pages using Phase 1 insights.</span></div>
+      </div>
+    </div>
+
+    <div class="subsection">
+      <h3>Phase 3: Scaling (Days 60-90+)</h3>
+      <div class="key-points">
+        <div class="kp"><span class="kp-marker"></span><span>Increase budgets on proven campaigns. Open new ad sets only when current ones plateau.</span></div>
+        <div class="kp"><span class="kp-marker"></span><span>Expand into lookalike audiences and new platforms.</span></div>
+        <div class="kp"><span class="kp-marker"></span><span>Continue testing new creatives — Andromeda still rewards diversity at scale.</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 10. Custom Audiences -->
+  <div class="section" id="audiences">
+    <div class="section-header">
+      <h2>Custom Audiences &amp; Targeting</h2>
+      <span class="speaker-tag">Ciara</span>
+    </div>
+    <p>Custom audiences let you target people who have already interacted with your business. The key is building a data hierarchy — not all interactions are equal.</p>
+
+    <div class="key-points">
+      <div class="kp"><span class="kp-marker"></span><span><strong>Data hierarchy (highest to lowest value):</strong> Closed sales &rarr; Qualified leads &rarr; Pixel-tracked bookings &rarr; Form submissions &rarr; Landing page viewers &rarr; Social media engagers.</span></div>
+      <div class="kp"><span class="kp-marker"></span><span><strong>Segmentation</strong> — build separate audiences for each level. Don't lump website visitors with paying customers; they need completely different messaging.</span></div>
+      <div class="kp"><span class="kp-marker"></span><span><strong>Lookalike audiences</strong> — seed them with your highest-quality data (closed sales list) rather than broad website traffic. A 1% lookalike from buyers outperforms a 1% lookalike from page visitors.</span></div>
+      <div class="kp"><span class="kp-marker"></span><span><strong>Retargeting layers</strong> — show different ads to people at different stages. Someone who visited the LP but didn't book needs a different message than someone who booked but didn't show.</span></div>
+    </div>
+  </div>
+
+  <!-- 11. Marketing as Debating -->
+  <div class="section" id="debating">
+    <div class="section-header">
+      <h2>Marketing as Debating at Scale</h2>
+      <span class="speaker-tag">Brandon</span>
+    </div>
+    <p>Marketing is constructing sufficient reasons for someone to take action. Every person has a worldview (naive realism) — they believe they see the world as it truly is. Your job is to build enough evidence to shift that view.</p>
+
+    <div class="key-points">
+      <div class="kp"><span class="kp-marker"></span><span><strong>Naive realism</strong> — people believe their perception is objective truth. Marketing must work within their existing beliefs, not against them. Start from where they are, not where you want them to be.</span></div>
+      <div class="kp"><span class="kp-marker"></span><span><strong>Constructing sufficient reasons</strong> — each person needs a different amount of evidence to act. Some need one testimonial; others need 12 touchpoints. Your system must accommodate both.</span></div>
+      <div class="kp"><span class="kp-marker"></span><span><strong>Lowering psychological resistance</strong> — instead of pushing harder, remove barriers. It's easier to make the path smoother than to make the push stronger.</span></div>
+      <div class="kp"><span class="kp-marker"></span><span><strong>Reddit test</strong> — posted anonymously on Reddit to gauge raw, unbiased reactions to messaging. Real-world feedback without brand bias. Useful for testing hooks and value propositions.</span></div>
+      <div class="kp"><span class="kp-marker"></span><span><strong>Skepticism ads</strong> — ads that lean into doubt ("You're probably thinking this won't work for you...") outperform hype-based messaging because they match the reader's internal monologue.</span></div>
+    </div>
+
+    <div class="callout">
+      <strong>Core principle:</strong> The prospect is already having a conversation in their head about your category. Your ad's job is to join that conversation, not start a new one.
+    </div>
+  </div>
+
+  <!-- 12. Nurture Sequences -->
+  <div class="section" id="nurture">
+    <div class="section-header">
+      <h2>Nurture Sequences &amp; Workflows</h2>
+      <span class="speaker-tag">Team</span>
+    </div>
+    <p>Three types of nurture sequences, each with a distinct job. The lead doesn't care about your process — they care about their problem. Meet them where they are on the awareness spectrum.</p>
+
+    <div class="subsection">
+      <h3>Notificational Nurture</h3>
+      <div class="key-points">
+        <div class="kp"><span class="kp-marker"></span><span>Transactional messages — booking confirmations, reminders, follow-ups. Functional, not persuasive.</span></div>
+      </div>
+    </div>
+
+    <div class="subsection">
+      <h3>Lead Nurture</h3>
+      <div class="key-points">
+        <div class="kp"><span class="kp-marker"></span><span><strong>Emotional and booking-focused.</strong> The goal is to get them on a call. Use story, social proof, and urgency.</span></div>
+        <div class="kp"><span class="kp-marker"></span><span>Personalisation through GHL logic branching — different paths based on responses, tags, and behaviour.</span></div>
+        <div class="kp"><span class="kp-marker"></span><span>Custom values let you insert dynamic content (name, service interest, location) without building separate sequences.</span></div>
+      </div>
+    </div>
+
+    <div class="subsection">
+      <h3>Sales Nurture</h3>
+      <div class="key-points">
+        <div class="kp"><span class="kp-marker"></span><span><strong>Logical and sale-priming.</strong> The prospect is already booked or post-call. Use case studies, ROI breakdowns, and process walkthroughs to reduce pre-purchase anxiety.</span></div>
+        <div class="kp"><span class="kp-marker"></span><span>Awareness spectrum positioning — tailor content to where they are: unaware &rarr; problem-aware &rarr; solution-aware &rarr; product-aware &rarr; most aware.</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 13. A/B Testing -->
+  <div class="section" id="ab-testing">
+    <div class="section-header">
+      <h2>A/B Testing: GHL &amp; Meta</h2>
+      <span class="speaker-tag">Sophie / Ciara</span>
+    </div>
+    <p>Systematic testing across landing pages (GoHighLevel) and ad campaigns (Meta Experiments). The discipline is in knowing what to test, testing one variable at a time, and waiting for statistical significance.</p>
+
+    <div class="subsection">
+      <h3>GHL Landing Page Testing (Sophie)</h3>
+      <div class="key-points">
+        <div class="kp"><span class="kp-marker"></span><span><strong>What to test:</strong> headlines, VSLs, survey vs form, CTA copy, hero imagery, above-the-fold layout.</span></div>
+        <div class="kp"><span class="kp-marker"></span><span><strong>What NOT to test:</strong> minor colour changes, button shapes, font swaps — things that won't meaningfully move conversion rates.</span></div>
+        <div class="kp"><span class="kp-marker"></span><span><strong>50/50 traffic split</strong> — GHL handles this natively. Cookie-based assignment so the same visitor always sees the same variant.</span></div>
+        <div class="kp"><span class="kp-marker"></span><span><strong>Statistical significance:</strong> need 100+ data points and 2-4 weeks of runtime. Don't call a test early.</span></div>
+      </div>
+    </div>
+
+    <div class="subsection">
+      <h3>Meta A/B Testing (Ciara)</h3>
+      <div class="key-points">
+        <div class="kp"><span class="kp-marker"></span><span><strong>Campaign-level testing</strong> — run via Meta's Experiments page, not by duplicating ad sets manually. Meta handles the randomised audience segmentation.</span></div>
+        <div class="kp"><span class="kp-marker"></span><span><strong>One variable at a time</strong> — test creative OR audience OR placement, never multiple simultaneously. If you change headline + image, you won't know which moved the needle.</span></div>
+        <div class="kp"><span class="kp-marker"></span><span><strong>Minimum runtime:</strong> 30 days recommended. Let the algorithm fully learn before drawing conclusions.</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 14. Google Experiments -->
+  <div class="section" id="google-experiments">
+    <div class="section-header">
+      <h2>Google Experiments</h2>
+      <span class="speaker-tag">Raj</span>
+    </div>
+    <p>Google's built-in experimentation framework for A/B testing campaign changes before committing. Use the "Custom experiment" type for controlled, cookie-based testing.</p>
+
+    <div class="key-points">
+      <div class="kp"><span class="kp-marker"></span><span><strong>Custom experiment type</strong> — select this over the other experiment options. It gives you the most control over what you're testing.</span></div>
+      <div class="kp"><span class="kp-marker"></span><span><strong>50/50 cookie-based split</strong> — Google assigns each user to a cohort consistently. A user in group A always sees variant A.</span></div>
+      <div class="kp"><span class="kp-marker"></span><span><strong>30-day minimum</strong> — run experiments for at least 30 days before making decisions. Shorter windows produce unreliable data.</span></div>
+      <div class="kp"><span class="kp-marker"></span><span><strong>Step-by-step:</strong> Create experiment &rarr; Set up variant campaign &rarr; Choose split percentage &rarr; Set schedule &rarr; Monitor &rarr; Apply winner (or end test).</span></div>
+      <div class="kp"><span class="kp-marker"></span><span><strong>Test one change at a time</strong> — same discipline as Meta testing. Isolate the variable or the result is meaningless.</span></div>
+    </div>
+  </div>
+
+  <!-- 15. Google Brand Campaigns -->
+  <div class="section" id="google-brand">
+    <div class="section-header">
+      <h2>Google Brand Campaigns</h2>
+      <span class="speaker-tag">Sophie</span>
+    </div>
+    <p>A separate, low-budget Google Ads campaign specifically for your own brand name keywords. Defensive positioning — make sure you own the top spot when someone searches your name.</p>
+
+    <div class="key-points">
+      <div class="kp"><span class="kp-marker"></span><span><strong>Exact + phrase match only</strong> — target your brand name and close variants. No broad match; you'd bleed into unrelated queries.</span></div>
+      <div class="kp"><span class="kp-marker"></span><span><strong>Low budget, high intent</strong> — brand searches already know you. The CPC is cheap and the conversion rate is typically the highest of any campaign.</span></div>
+      <div class="kp"><span class="kp-marker"></span><span><strong>Competitor ad groups</strong> — as a retaliation tactic. If competitors bid on your brand, create ad groups targeting their names. Use cautiously and only when warranted.</span></div>
+      <div class="kp"><span class="kp-marker"></span><span><strong>Decision flowchart:</strong> Are competitors bidding on your name? &rarr; Yes &rarr; Run brand campaign immediately. No &rarr; Still run it, but minimal budget as insurance.</span></div>
+    </div>
+  </div>
+
+  <!-- 16. Lead Quality Tracking -->
+  <div class="section" id="lead-quality">
+    <div class="section-header">
+      <h2>Lead Quality Tracking</h2>
+      <span class="speaker-tag">Patsy</span>
+    </div>
+    <p>Getting leads is meaningless if you can't trace which campaigns produce revenue. Track lead quality from first click to closed sale, then feed that data back into your ad strategy.</p>
+
+    <div class="key-points">
+      <div class="kp"><span class="kp-marker"></span><span><strong>UTM parameters</strong> — tag every ad link with source, medium, campaign, and content UTMs. This lets you trace each lead back to the exact ad and audience that generated it.</span></div>
+      <div class="kp"><span class="kp-marker"></span><span><strong>Lead tracker spreadsheet</strong> — maintain a live tracker that maps each lead from ad click &rarr; form fill &rarr; booking &rarr; show &rarr; close. Identify where each stage leaks.</span></div>
+      <div class="kp"><span class="kp-marker"></span><span><strong>AI call transcript review</strong> — use AI tools to transcribe and analyse sales calls. Pattern-match what top-performing leads say versus low-quality ones, then refine ad copy to attract more of the former.</span></div>
+      <div class="kp"><span class="kp-marker"></span><span><strong>Stages after launch</strong> — don't just set and forget. Review lead quality weekly for the first 60 days, then biweekly. Adjust targeting and copy based on actual close rates, not just lead volume.</span></div>
+    </div>
+  </div>
+
+  <!-- 17. Organic Content -->
+  <div class="section" id="organic">
+    <div class="section-header">
+      <h2>Organic Content Marketing</h2>
+      <span class="speaker-tag">Raj</span>
+    </div>
+    <p>Organic content builds the brand that paid traffic converts. The distinction between business and brand matters: a business sells a service; a brand commands trust and repeat attention.</p>
+
+    <div class="key-points">
+      <div class="kp"><span class="kp-marker"></span><span><strong>The 3 E's:</strong> Educate, Entertain, Engage. Every post should do at least one. The best posts do two.</span></div>
+      <div class="kp"><span class="kp-marker"></span><span><strong>Post frequency:</strong> 1-2 times per week is enough. Consistency matters more than volume.</span></div>
+      <div class="kp"><span class="kp-marker"></span><span><strong>Reuse organic as ads</strong> — posts that perform well organically already have social proof. Turn them into paid creatives with the engagement visible.</span></div>
+      <div class="kp"><span class="kp-marker"></span><span><strong>Brand vs performance marketing</strong> — performance (paid) drives immediate results; brand (organic) compounds over time. Both are necessary; neither replaces the other.</span></div>
+      <div class="kp"><span class="kp-marker"></span><span><strong>Channel adoption</strong> — don't spread across every platform. Pick 1-2 where your audience actually lives, and go deep.</span></div>
+    </div>
+  </div>
+
+  <!-- 18. Show Rates & Sales Reps -->
+  <div class="section" id="show-rates">
+    <div class="section-header">
+      <h2>Show Rates &amp; Sales Reps</h2>
+      <span class="speaker-tag">Brandon</span>
+    </div>
+    <p>Getting leads is only half the equation. If they don't show up to calls, nothing downstream works. And when they do show, the person on the other end of the call determines whether the system prints money.</p>
+
+    <div class="key-points">
+      <div class="kp"><span class="kp-marker"></span><span><strong>Target 70% show rate</strong> — below that, your nurture sequence or booking process has a leak. Diagnose before scaling.</span></div>
+      <div class="kp"><span class="kp-marker"></span><span><strong>Book calls before lunch</strong> — morning calls have significantly higher show rates. Afternoon slots, especially late afternoon, see the worst no-show rates.</span></div>
+      <div class="kp"><span class="kp-marker"></span><span><strong>Hiring reps via Meta lead ads</strong> — run ads specifically for sales rep recruitment. Screen for coachability and hunger, not just experience.</span></div>
+      <div class="kp"><span class="kp-marker"></span><span><strong>Interview process:</strong> mock calls + ethics tests. Can they sell without being pushy? Do they handle objections with empathy? These matter more than a polished CV.</span></div>
+      <div class="kp"><span class="kp-marker"></span><span><strong>Scaling playbook:</strong> fill one rep's calendar &rarr; prove the conversion rate &rarr; hire the next rep. Never hire ahead of demand.</span></div>
+    </div>
+
+    <div class="callout">
+      <strong>B2B timing insight:</strong> Decision-makers are freshest in the morning. Booking patterns should reflect when your prospect is most likely to be in "decide mode," not when your calendar has gaps.
+    </div>
+  </div>
+
+  <!-- 19. Identity & Growth -->
+  <div class="section" id="identity">
+    <div class="section-header">
+      <h2>Identity &amp; Growth</h2>
+      <span class="speaker-tag">Brandon</span>
+    </div>
+    <p>The closing summit session ties marketing strategy back to personal identity and business vision. The way you see yourself determines the ceiling of your business.</p>
+
+    <div class="key-points">
+      <div class="kp"><span class="kp-marker"></span><span><strong>Identity shapes action</strong> — naive realism applies to self-perception too. If you see yourself as "a small business owner who does a bit of marketing," your campaigns will reflect that. Redefine the identity first.</span></div>
+      <div class="kp"><span class="kp-marker"></span><span><strong>US expansion opportunity</strong> — Where U? discussed growth into the US market, noting the scale difference and adaptation required. What works in Australia needs recalibration for US audiences.</span></div>
+      <div class="kp"><span class="kp-marker"></span><span><strong>Alumni perks &amp; community</strong> — ongoing access to resources, advisory calls, and the member community. The summit is a starting point, not a one-off event.</span></div>
+    </div>
+
+    <div class="callout">
+      <strong>Final takeaway:</strong> The best marketing system in the world won't work if the person running it doesn't believe they deserve the results it can produce. Fix the operator before you fix the funnel.
+    </div>
+  </div>
+
+  <footer class="footer">
+    Where U? Marketing Summit — Compiled from 22 slide decks
+  </footer>
+</div>
