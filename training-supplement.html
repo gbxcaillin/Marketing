@@ -1,0 +1,1031 @@
+<title>Summit Training Supplement</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,500;0,7..72,600;0,7..72,700;1,7..72,400&family=Plus+Jakarta+Sans:wght@500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+:root {
+  --ground: #FAFAF7;
+  --surface: #FFFFFF;
+  --surface-alt: #F2F1EC;
+  --text: #2C2C2C;
+  --text-dim: #6B6B6B;
+  --text-faint: #9A9A9A;
+  --green: #2D5F3F;
+  --green-soft: #E8F0EA;
+  --green-mid: #3A7A50;
+  --amber: #D4943A;
+  --amber-soft: #FDF4E7;
+  --coral: #C4564A;
+  --coral-soft: #FBEAE8;
+  --border: #E4E2DC;
+  --border-strong: #D0CDC5;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --ground: #1A1D1E;
+    --surface: #222627;
+    --surface-alt: #2A2E30;
+    --text: #E8E4DC;
+    --text-dim: #A09A8E;
+    --text-faint: #706B62;
+    --green: #5FAE78;
+    --green-soft: #1E2E24;
+    --green-mid: #4A9462;
+    --amber: #E8A84C;
+    --amber-soft: #2C2518;
+    --coral: #E06B5E;
+    --coral-soft: #2C1E1C;
+    --border: #363A3C;
+    --border-strong: #484C4E;
+  }
+}
+:root[data-theme="dark"] {
+  --ground: #1A1D1E;
+  --surface: #222627;
+  --surface-alt: #2A2E30;
+  --text: #E8E4DC;
+  --text-dim: #A09A8E;
+  --text-faint: #706B62;
+  --green: #5FAE78;
+  --green-soft: #1E2E24;
+  --green-mid: #4A9462;
+  --amber: #E8A84C;
+  --amber-soft: #2C2518;
+  --coral: #E06B5E;
+  --coral-soft: #2C1E1C;
+  --border: #363A3C;
+  --border-strong: #484C4E;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: var(--ground);
+  color: var(--text);
+  font-family: 'Literata', Georgia, 'Times New Roman', serif;
+  font-size: 16px;
+  line-height: 1.7;
+  font-optical-sizing: auto;
+}
+
+.header {
+  background: var(--green);
+  color: #fff;
+  padding: 3.5rem 2rem 3rem;
+  text-align: center;
+}
+.header-label {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  opacity: 0.7;
+  margin-bottom: 0.75rem;
+}
+.header h1 {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-weight: 800;
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+  line-height: 1.2;
+  margin-bottom: 0.75rem;
+  text-wrap: balance;
+}
+.header p {
+  font-size: 1.05rem;
+  opacity: 0.85;
+  max-width: 38rem;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+nav.toc {
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  padding: 1.25rem 2rem;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  overflow-x: auto;
+}
+nav.toc .toc-inner {
+  display: flex;
+  gap: 0.25rem;
+  max-width: 72rem;
+  margin: 0 auto;
+  flex-wrap: nowrap;
+}
+nav.toc a {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--text-dim);
+  text-decoration: none;
+  padding: 0.4rem 0.75rem;
+  border-radius: 6px;
+  white-space: nowrap;
+  transition: background 0.15s, color 0.15s;
+}
+nav.toc a:hover {
+  background: var(--green-soft);
+  color: var(--green);
+}
+nav.toc a .num {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.7rem;
+  opacity: 0.5;
+  margin-right: 0.3rem;
+}
+
+.container {
+  max-width: 52rem;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+section.module {
+  padding: 3.5rem 0 2rem;
+  border-bottom: 1px solid var(--border);
+}
+section.module:last-of-type {
+  border-bottom: none;
+}
+
+.module-num {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--green);
+  margin-bottom: 0.5rem;
+}
+.module h2 {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-weight: 800;
+  font-size: 1.65rem;
+  line-height: 1.25;
+  color: var(--text);
+  margin-bottom: 0.5rem;
+  text-wrap: balance;
+}
+.module .module-lead {
+  font-size: 1.05rem;
+  color: var(--text-dim);
+  margin-bottom: 2rem;
+  max-width: 40rem;
+}
+
+.module h3 {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-weight: 700;
+  font-size: 1.15rem;
+  color: var(--text);
+  margin: 2rem 0 0.75rem;
+}
+.module h3:first-of-type {
+  margin-top: 0;
+}
+
+.module p {
+  margin-bottom: 1rem;
+}
+
+.framework {
+  background: var(--green-soft);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 1.5rem;
+  margin: 1.25rem 0;
+}
+.framework-title {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--green);
+  margin-bottom: 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.framework-title::before {
+  content: '';
+  display: inline-block;
+  width: 3px;
+  height: 1rem;
+  background: var(--green);
+  border-radius: 2px;
+}
+
+.tip {
+  background: var(--amber-soft);
+  border-left: 3px solid var(--amber);
+  border-radius: 0 8px 8px 0;
+  padding: 1rem 1.25rem;
+  margin: 1.25rem 0;
+  font-size: 0.95rem;
+}
+.tip-label {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-weight: 700;
+  font-size: 0.8rem;
+  color: var(--amber);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 0.35rem;
+}
+
+.warning {
+  background: var(--coral-soft);
+  border-left: 3px solid var(--coral);
+  border-radius: 0 8px 8px 0;
+  padding: 1rem 1.25rem;
+  margin: 1.25rem 0;
+  font-size: 0.95rem;
+}
+.warning-label {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-weight: 700;
+  font-size: 0.8rem;
+  color: var(--coral);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 0.35rem;
+}
+
+.formula {
+  background: var(--surface-alt);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1rem 1.25rem;
+  margin: 1rem 0;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.88rem;
+  line-height: 1.8;
+  overflow-x: auto;
+}
+.formula .label {
+  color: var(--text-dim);
+  font-size: 0.78rem;
+}
+.formula .result {
+  color: var(--green);
+  font-weight: 500;
+}
+
+ol, ul {
+  margin: 0.75rem 0 1.25rem 1.5rem;
+}
+li {
+  margin-bottom: 0.5rem;
+}
+li::marker {
+  color: var(--green);
+}
+
+.steps {
+  list-style: none;
+  margin-left: 0;
+  counter-reset: step;
+}
+.steps li {
+  counter-increment: step;
+  padding-left: 2.5rem;
+  position: relative;
+  margin-bottom: 1rem;
+}
+.steps li::before {
+  content: counter(step);
+  position: absolute;
+  left: 0;
+  top: 0.15rem;
+  width: 1.6rem;
+  height: 1.6rem;
+  background: var(--green);
+  color: #fff;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-weight: 700;
+  font-size: 0.78rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.checklist {
+  list-style: none;
+  margin-left: 0;
+}
+.checklist li {
+  padding-left: 1.75rem;
+  position: relative;
+}
+.checklist li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.45rem;
+  width: 1rem;
+  height: 1rem;
+  border: 2px solid var(--border-strong);
+  border-radius: 3px;
+}
+
+.grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin: 1rem 0;
+}
+@media (max-width: 600px) {
+  .grid-2 { grid-template-columns: 1fr; }
+}
+.grid-2 .card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1.15rem;
+}
+.grid-2 .card-title {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-weight: 700;
+  font-size: 0.88rem;
+  color: var(--green);
+  margin-bottom: 0.4rem;
+}
+.grid-2 .card p {
+  font-size: 0.92rem;
+  margin-bottom: 0.5rem;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1rem 0;
+  font-size: 0.92rem;
+  font-variant-numeric: tabular-nums;
+}
+th {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-weight: 600;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--text-dim);
+  text-align: left;
+  padding: 0.6rem 0.75rem;
+  border-bottom: 2px solid var(--border-strong);
+}
+td {
+  padding: 0.6rem 0.75rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.exercise {
+  background: var(--surface);
+  border: 2px dashed var(--border-strong);
+  border-radius: 10px;
+  padding: 1.5rem;
+  margin: 1.5rem 0;
+}
+.exercise-label {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-weight: 700;
+  font-size: 0.82rem;
+  color: var(--green);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 0.75rem;
+}
+
+strong { font-weight: 600; }
+em { font-style: italic; }
+
+.footer {
+  text-align: center;
+  padding: 2.5rem 1.5rem;
+  color: var(--text-faint);
+  font-size: 0.85rem;
+  border-top: 1px solid var(--border);
+}
+.footer span {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-weight: 600;
+  color: var(--text-dim);
+}
+</style>
+
+<div class="header">
+  <div class="header-label">Where U? Summit &middot; Supplementary Training</div>
+  <h1>The Missing Modules</h1>
+  <p>Seven training modules covering the skill gaps identified in the summit curriculum. Each module gives you a framework, the formulas, and a hands-on exercise.</p>
+</div>
+
+<nav class="toc">
+  <div class="toc-inner">
+    <a href="#offer"><span class="num">01</span>Offer Creation</a>
+    <a href="#budget"><span class="num">02</span>Unit Economics</a>
+    <a href="#structure"><span class="num">03</span>Campaign Structure</a>
+    <a href="#email"><span class="num">04</span>Email Deliverability</a>
+    <a href="#reporting"><span class="num">05</span>Reporting &amp; KPIs</a>
+    <a href="#policy"><span class="num">06</span>Ad Policy</a>
+    <a href="#postsale"><span class="num">07</span>Post-Sale Loop</a>
+  </div>
+</nav>
+
+<div class="container">
+
+<!-- MODULE 1: OFFER CREATION -->
+<section class="module" id="offer">
+  <div class="module-num">Module 01</div>
+  <h2>Offer Creation &amp; Positioning</h2>
+  <p class="module-lead">Your ad can be perfect, your funnel leak-proof, and your copy razor-sharp &mdash; but if the offer is weak, nothing converts. This module builds the offer before you write a single ad.</p>
+
+  <h3>Why This Gap Matters</h3>
+  <p>The summit teaches you <em>how to say it</em> (copy, hooks, neuromarketing) and <em>where to run it</em> (Meta, Google, audiences). But it skips <em>what you're actually selling</em>. A Green Brain avatar tells you who your buyer is; the offer is what you put in front of them. Without a structured offer, you're optimising delivery of something nobody wants to buy.</p>
+
+  <div class="framework">
+    <div class="framework-title">The Offer Stack Framework</div>
+    <p>Every high-converting offer has five layers. Stack them in order:</p>
+    <ol class="steps">
+      <li><strong>The Core Outcome.</strong> Not what the product <em>is</em>, but what the buyer <em>gets</em>. Write it as a before/after transformation. "Go from 3 leads a week to 3 leads a day" beats "marketing coaching programme."</li>
+      <li><strong>The Vehicle.</strong> How you deliver the outcome. Course, done-for-you, software, coaching calls, templates. This is the thing they're buying. Name it distinctly &mdash; a proprietary name makes the vehicle feel incomparable.</li>
+      <li><strong>The Bonuses.</strong> Extras that remove objections, not pad value. Each bonus should answer a specific fear: "I won't have time" &rarr; quick-start templates. "What if it doesn't work for my niche?" &rarr; niche adaptation guide. Three bonuses maximum; more dilutes focus.</li>
+      <li><strong>The Guarantee.</strong> Transfers risk from buyer to seller. Options: money-back (30/60/90 day), conditional ("do the work or no refund"), performance ("if you don't get X, we work free until you do"), or hybrid. The stronger your guarantee, the higher your conversion &mdash; refund rates rarely increase.</li>
+      <li><strong>The Price Anchor.</strong> The price only makes sense relative to something. Anchor against: the cost of not solving the problem, the price of alternatives, or the total value of the stack. Then present your price as a fraction of that anchor.</li>
+    </ol>
+  </div>
+
+  <h3>Positioning: Pick Your Lane</h3>
+  <p>Positioning decides who you compete with. There are four lanes, and you must pick one:</p>
+
+  <div class="grid-2">
+    <div class="card">
+      <div class="card-title">Price Leader</div>
+      <p>Cheapest option. Win on volume, lose on margins. Only works at scale. Dangerous for service businesses.</p>
+    </div>
+    <div class="card">
+      <div class="card-title">Niche Specialist</div>
+      <p>"The X for Y people." Narrow audience, deep relevance. Best lane for small businesses &mdash; you become the obvious choice for a defined group.</p>
+    </div>
+    <div class="card">
+      <div class="card-title">Premium / Done-for-You</div>
+      <p>Highest price, highest service. You do the work. Margin-rich but hard to scale past your capacity.</p>
+    </div>
+    <div class="card">
+      <div class="card-title">Category Creator</div>
+      <p>Redefine the market. "We're not a CRM, we're a revenue operating system." High risk, high reward. Requires budget to educate the market.</p>
+    </div>
+  </div>
+
+  <div class="tip">
+    <div class="tip-label">Tip</div>
+    <p>If you can't explain your positioning in one sentence that a stranger immediately understands, you haven't picked a lane &mdash; you're straddling two. Test it: say your one sentence to five people who don't know your business. If they can repeat it back accurately, you're positioned.</p>
+  </div>
+
+  <h3>Value Stacking on a Landing Page</h3>
+  <p>When you write your landing page (Module 7 of the summit covers layout), present the offer stack like this:</p>
+  <ol>
+    <li>State the core outcome as the headline.</li>
+    <li>Introduce the vehicle with its proprietary name.</li>
+    <li>List what's included with individual values beside each item.</li>
+    <li>Add each bonus on its own line, each with a value.</li>
+    <li>Show the total stacked value (sum of all line items).</li>
+    <li>Reveal the actual price as a fraction: "Total value: $4,200. Your investment today: $497."</li>
+    <li>State the guarantee directly below the price.</li>
+  </ol>
+
+  <div class="exercise">
+    <div class="exercise-label">Exercise &mdash; Build Your Offer Stack</div>
+    <ul class="checklist">
+      <li>Write your core outcome as a before/after statement in one sentence.</li>
+      <li>Name your vehicle something proprietary (not "coaching" or "course").</li>
+      <li>List 3 objections your audience has. Create one bonus that answers each.</li>
+      <li>Choose a guarantee type and write the exact wording.</li>
+      <li>Calculate your price anchor: what does the problem cost per year if unsolved?</li>
+      <li>Set your price at 10&ndash;20% of the anchor. Does it still feel profitable? If not, your outcome isn't valuable enough &mdash; rewrite it.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- MODULE 2: BUDGET & UNIT ECONOMICS -->
+<section class="module" id="budget">
+  <div class="module-num">Module 02</div>
+  <h2>Budget &amp; Unit Economics</h2>
+  <p class="module-lead">Before you spend a dollar on ads, know exactly how much a customer is worth, how much you can afford to pay for one, and when you'll break even. This module gives you the formulas.</p>
+
+  <h3>The Three Numbers You Must Know</h3>
+
+  <div class="framework">
+    <div class="framework-title">Core Metrics</div>
+    <div class="formula">
+      <div><span class="label">Customer Acquisition Cost (CAC)</span></div>
+      <div>CAC = Total Ad Spend &divide; Number of Customers Acquired</div>
+      <br>
+      <div><span class="label">Lifetime Value (LTV)</span></div>
+      <div>LTV = Avg Revenue per Customer &times; Avg Retention (months) &times; Gross Margin %</div>
+      <br>
+      <div><span class="label">LTV : CAC Ratio</span></div>
+      <div>Target: <span class="result">3 : 1 or higher</span></div>
+      <div>Below 1:1 = losing money. 1&ndash;3:1 = fragile. 3:1+ = healthy. 5:1+ = under-investing in growth.</div>
+    </div>
+  </div>
+
+  <h3>Working Backwards from Your Goal</h3>
+  <p>The summit teaches you to optimise ads for leads. But how many leads do you actually need? Work backwards:</p>
+
+  <div class="formula">
+    <div><span class="label">Revenue target</span>: $10,000/month</div>
+    <div><span class="label">Average sale value</span>: $2,000</div>
+    <div><span class="label">Sales needed</span>: 10,000 &divide; 2,000 = <span class="result">5 sales</span></div>
+    <div><span class="label">Close rate</span>: 20%</div>
+    <div><span class="label">Calls needed</span>: 5 &divide; 0.20 = <span class="result">25 calls</span></div>
+    <div><span class="label">Show rate</span>: 60%</div>
+    <div><span class="label">Bookings needed</span>: 25 &divide; 0.60 = <span class="result">42 bookings</span></div>
+    <div><span class="label">Lead-to-booking rate</span>: 15%</div>
+    <div><span class="label">Leads needed</span>: 42 &divide; 0.15 = <span class="result">280 leads</span></div>
+  </div>
+
+  <p>Now you know: 280 leads/month at your target cost per lead tells you the budget.</p>
+
+  <div class="formula">
+    <div><span class="label">If target CPL is $12</span></div>
+    <div>Monthly budget = 280 &times; $12 = <span class="result">$3,360</span></div>
+    <div>Daily budget = $3,360 &divide; 30 = <span class="result">$112/day</span></div>
+  </div>
+
+  <h3>Breakeven ROAS</h3>
+  <p>Breakeven ROAS tells you the minimum return on ad spend before you lose money:</p>
+  <div class="formula">
+    <div>Breakeven ROAS = 1 &divide; Gross Margin %</div>
+    <br>
+    <div><span class="label">Example: 60% gross margin</span></div>
+    <div>Breakeven ROAS = 1 &divide; 0.60 = <span class="result">1.67x</span></div>
+    <div>Every dollar in ads must return $1.67 in revenue to break even.</div>
+  </div>
+
+  <h3>Budget Scaling Rules</h3>
+  <div class="framework">
+    <div class="framework-title">The 20% Rule</div>
+    <p>When scaling ad spend, increase budget by no more than <strong>20% every 3&ndash;5 days</strong>. Larger jumps reset Meta's learning phase and spike your CPL. If you need to scale faster, duplicate the campaign at the higher budget rather than increasing the original.</p>
+  </div>
+
+  <div class="grid-2">
+    <div class="card">
+      <div class="card-title">Testing Budget</div>
+      <p>$20&ndash;50/day per ad set. Run for 3&ndash;5 days minimum. Need enough spend to exit learning phase (roughly 50 conversion events per week at the ad set level).</p>
+    </div>
+    <div class="card">
+      <div class="card-title">Scaling Budget</div>
+      <p>Once a campaign is profitable for 7+ days, begin scaling. Vertical (increase budget) up to 20%/move. Horizontal (duplicate to new audiences) for faster scaling without risking the original.</p>
+    </div>
+  </div>
+
+  <div class="warning">
+    <div class="warning-label">Common Mistake</div>
+    <p>Calculating ROAS on front-end revenue only. If you sell a $47 product but the average customer goes on to spend $400 over 6 months, your real ROAS is 8.5x what your ad dashboard shows. Track <strong>blended ROAS</strong> (total revenue from ad-acquired customers &divide; total ad spend) monthly, not just in-platform reported ROAS.</p>
+  </div>
+
+  <div class="exercise">
+    <div class="exercise-label">Exercise &mdash; Your Unit Economics Worksheet</div>
+    <ul class="checklist">
+      <li>Calculate your LTV using real data (or best estimates if new).</li>
+      <li>Work backwards from your monthly revenue target to leads needed.</li>
+      <li>Calculate your maximum allowable CPL: (LTV &times; Close Rate &times; Show Rate &times; Booking Rate) &divide; 3.</li>
+      <li>Set your daily budget: Leads needed &divide; 30 &times; Max CPL.</li>
+      <li>Calculate your breakeven ROAS.</li>
+      <li>Write the number where you can see it every day. Every ad decision passes through this filter.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- MODULE 3: CAMPAIGN STRUCTURE -->
+<section class="module" id="structure">
+  <div class="module-num">Module 03</div>
+  <h2>Campaign Structure &amp; Account Setup</h2>
+  <p class="module-lead">The summit teaches what goes <em>inside</em> ads (creative, copy, audiences). This module teaches how campaigns are <em>organised</em> &mdash; the architecture that keeps your account manageable and your data clean as you scale.</p>
+
+  <h3>Meta Campaign Structure</h3>
+
+  <div class="framework">
+    <div class="framework-title">The 3-Layer Hierarchy</div>
+    <ol class="steps">
+      <li><strong>Campaign</strong> &mdash; Sets the objective (leads, conversions, traffic) and the budget type (CBO or ABO). One campaign per objective. Don't mix lead gen and brand awareness in the same campaign.</li>
+      <li><strong>Ad Set</strong> &mdash; Controls audience, placement, schedule, and (with ABO) budget. One audience segment per ad set. This is where the 3-Phase targeting from the summit lives: cold audiences in one ad set, warm in another, hot in a third.</li>
+      <li><strong>Ad</strong> &mdash; The creative + copy. Run 3&ndash;5 ad variations per ad set. This is where the Hook/Story/Offer copy, the Testimonial 2.0, and the creative diversity the summit teaches all sit.</li>
+    </ol>
+  </div>
+
+  <h3>Naming Conventions</h3>
+  <p>When you have 40 campaigns, naming is survival. Use a consistent formula:</p>
+  <div class="formula">
+    <div><span class="label">Campaign</span>: [Objective] - [Offer] - [Budget Type] - [Date]</div>
+    <div>Example: <span class="result">LEADS - Free Audit - CBO - 2026-09</span></div>
+    <br>
+    <div><span class="label">Ad Set</span>: [Audience Type] - [Targeting Detail] - [Placement]</div>
+    <div>Example: <span class="result">COLD - Lookalike 1% Buyers - Auto</span></div>
+    <br>
+    <div><span class="label">Ad</span>: [Format] - [Hook Variant] - [CTA]</div>
+    <div>Example: <span class="result">VIDEO - Pain Hook v2 - Book Call</span></div>
+  </div>
+
+  <h3>Google Ads Structure</h3>
+  <p>The summit covers Google Brand campaigns and experiments. Here's how to organise the full account:</p>
+
+  <div class="grid-2">
+    <div class="card">
+      <div class="card-title">Search Campaigns</div>
+      <p><strong>Brand:</strong> Covered in summit. Bid on your own name.<br>
+      <strong>Competitor:</strong> Bid on competitor names. Low quality score, high CPC, but captures intent.<br>
+      <strong>Non-Brand:</strong> Industry/problem keywords. "Marketing agency Melbourne," "best Facebook ads course." Highest volume, most competitive.<br>
+      <strong>Long-Tail:</strong> Specific queries. "How to reduce CPL on Meta ads." Lower volume, higher intent, cheaper clicks.</p>
+    </div>
+    <div class="card">
+      <div class="card-title">Other Campaign Types</div>
+      <p><strong>Performance Max:</strong> Google's AI-driven, all-placements campaign. Feeds it creative assets and it distributes. Good for e-commerce, less transparent for lead gen.<br>
+      <strong>Display:</strong> Banner ads across partner sites. Cheap clicks, low intent. Best for retargeting, not prospecting.<br>
+      <strong>YouTube:</strong> Video ads. Pairs well with the summit's video scripting frameworks. Use for awareness and retargeting.</p>
+    </div>
+  </div>
+
+  <h3>Budget Allocation Across Campaigns</h3>
+  <div class="framework">
+    <div class="framework-title">The 70/20/10 Rule</div>
+    <ul>
+      <li><strong>70%</strong> to proven campaigns (your best-performing, already profitable ads).</li>
+      <li><strong>20%</strong> to scaling experiments (new audiences, new placements for proven creative).</li>
+      <li><strong>10%</strong> to net-new tests (new offers, new angles, new formats).</li>
+    </ul>
+    <p>This prevents the common mistake of spreading budget evenly across everything, which starves winners and over-funds experiments.</p>
+  </div>
+
+  <h3>CBO vs ABO</h3>
+  <div class="grid-2">
+    <div class="card">
+      <div class="card-title">Campaign Budget Optimisation (CBO)</div>
+      <p>Budget set at campaign level. Meta distributes across ad sets automatically. Best for: scaling proven audiences, letting Meta's algorithm find the cheapest conversions. Risk: Meta may ignore smaller ad sets entirely.</p>
+    </div>
+    <div class="card">
+      <div class="card-title">Ad Set Budget Optimisation (ABO)</div>
+      <p>Budget set per ad set. You control exactly how much each audience gets. Best for: testing new audiences at controlled spend, ensuring each segment gets fair evaluation. Risk: less algorithmic optimisation, more manual management.</p>
+    </div>
+  </div>
+
+  <div class="exercise">
+    <div class="exercise-label">Exercise &mdash; Map Your Account</div>
+    <ul class="checklist">
+      <li>Draw your campaign structure: how many campaigns, what objective each serves.</li>
+      <li>Under each campaign, list your ad sets by audience temperature (cold/warm/hot from the summit's 3-Phase process).</li>
+      <li>Write a naming convention formula and rename your existing campaigns to match.</li>
+      <li>Allocate your current monthly budget using the 70/20/10 rule. What changes?</li>
+    </ul>
+  </div>
+</section>
+
+<!-- MODULE 4: EMAIL DELIVERABILITY -->
+<section class="module" id="email">
+  <div class="module-num">Module 04</div>
+  <h2>Email Marketing &amp; Deliverability</h2>
+  <p class="module-lead">The summit covers nurture sequences and what to write. This module covers the infrastructure underneath &mdash; the authentication, warm-up, and hygiene that determines whether your emails actually arrive.</p>
+
+  <h3>Domain Authentication</h3>
+  <p>If your emails aren't authenticated, Gmail and Outlook treat them as suspicious. Three records must be configured in your DNS:</p>
+
+  <div class="framework">
+    <div class="framework-title">The Authentication Stack</div>
+    <ol class="steps">
+      <li><strong>SPF (Sender Policy Framework).</strong> A DNS TXT record that lists which mail servers are allowed to send email from your domain. Without it, anyone can send email pretending to be you. Your email platform (GHL, Mailchimp, etc.) will give you the exact record to add.</li>
+      <li><strong>DKIM (DomainKeys Identified Mail).</strong> Adds a cryptographic signature to every email proving it hasn't been tampered with in transit. Your platform generates a public/private key pair &mdash; you publish the public key as a DNS TXT record.</li>
+      <li><strong>DMARC (Domain-based Message Authentication).</strong> Tells receiving servers what to do if SPF or DKIM fails: nothing, quarantine, or reject. Start with <code>p=none</code> (monitor mode), then move to <code>p=quarantine</code> after 2&ndash;4 weeks of clean reports.</li>
+    </ol>
+  </div>
+
+  <div class="tip">
+    <div class="tip-label">Tip</div>
+    <p>Use <strong>mail-tester.com</strong> to check your setup. Send a test email to their address; they score it out of 10 and flag any missing authentication, blacklist appearances, or content issues. Aim for 9+.</p>
+  </div>
+
+  <h3>Domain &amp; IP Warm-Up</h3>
+  <p>A new domain or sending IP has no reputation. If you immediately blast 5,000 emails, you'll land in spam. Warm up gradually:</p>
+
+  <div class="framework">
+    <div class="framework-title">14-Day Warm-Up Schedule</div>
+    <div style="overflow-x: auto;">
+      <table>
+        <thead>
+          <tr><th>Day</th><th>Volume</th><th>Who to Send To</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>1&ndash;2</td><td>20&ndash;50</td><td>Your most engaged contacts (recent openers, recent buyers)</td></tr>
+          <tr><td>3&ndash;4</td><td>50&ndash;100</td><td>Engaged contacts + recent opt-ins</td></tr>
+          <tr><td>5&ndash;7</td><td>100&ndash;300</td><td>Expand to all contacts who've opened in last 90 days</td></tr>
+          <tr><td>8&ndash;10</td><td>300&ndash;1,000</td><td>All contacts who've opened in last 180 days</td></tr>
+          <tr><td>11&ndash;14</td><td>1,000&ndash;5,000</td><td>Full list (excluding hard bounces and long-term inactive)</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <h3>List Hygiene</h3>
+  <p>A dirty list kills deliverability faster than any other factor. Clean it regularly:</p>
+  <ul>
+    <li><strong>Remove hard bounces immediately.</strong> These are invalid addresses. Continuing to send to them damages your sender score.</li>
+    <li><strong>Sunset inactive subscribers</strong> after 90 days of no opens. Send a re-engagement email first ("Are you still interested?"). If no response, remove or suppress.</li>
+    <li><strong>Run your list through a verification service</strong> (ZeroBounce, NeverBounce) before importing or after any period of inactivity. Removes catch-all traps, disposable addresses, and role-based addresses.</li>
+    <li><strong>Use double opt-in</strong> for all new subscribers. It reduces list size but dramatically improves quality and deliverability.</li>
+  </ul>
+
+  <h3>Content That Lands in Primary</h3>
+  <p>Gmail's tabs (Primary, Promotions, Spam) sort on content signals:</p>
+  <div class="grid-2">
+    <div class="card">
+      <div class="card-title">Lands in Primary</div>
+      <p>Plain text or minimal HTML. One link maximum. Conversational tone. Sent from a personal name, not a brand. No images or one small image. Short subject lines.</p>
+    </div>
+    <div class="card">
+      <div class="card-title">Lands in Promotions/Spam</div>
+      <p>Heavy HTML templates. Multiple images, buttons, and links. "Unsubscribe" in footer (legally required but hurts placement). Trigger words: "free," "limited time," "act now," excessive capitalisation.</p>
+    </div>
+  </div>
+
+  <div class="warning">
+    <div class="warning-label">Common Mistake</div>
+    <p>Sending the nurture sequences the summit teaches from a brand-new domain without warming up first. Your beautifully written 7-email sequence will land in spam if the domain has no reputation. Always warm up before activating automations.</p>
+  </div>
+
+  <div class="exercise">
+    <div class="exercise-label">Exercise &mdash; Deliverability Audit</div>
+    <ul class="checklist">
+      <li>Check your SPF, DKIM, and DMARC records using mxtoolbox.com. Fix any that are missing.</li>
+      <li>Send a test email to mail-tester.com. Record your score.</li>
+      <li>Pull your email list stats: total contacts, open rate over last 90 days, bounce rate.</li>
+      <li>Remove all hard bounces and contacts with zero opens in 180+ days.</li>
+      <li>If using a new domain, write a 14-day warm-up plan with specific daily volumes.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- MODULE 5: REPORTING & KPIs -->
+<section class="module" id="reporting">
+  <div class="module-num">Module 05</div>
+  <h2>Reporting &amp; KPI Dashboards</h2>
+  <p class="module-lead">The summit teaches you to track lead quality and run A/B tests. This module builds the reporting system around those skills &mdash; what to measure at each stage, when to act on data, and how to build a dashboard you'll actually check.</p>
+
+  <h3>Metrics by Funnel Stage</h3>
+  <p>Every metric lives at a specific stage. Mixing stages (comparing CPL to close rate) creates confusion. Separate them:</p>
+
+  <div class="framework">
+    <div class="framework-title">The Funnel Metrics Map</div>
+    <div style="overflow-x: auto;">
+      <table>
+        <thead>
+          <tr><th>Stage</th><th>Key Metrics</th><th>Healthy Benchmarks</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Ads</strong></td>
+            <td>CPM, CTR, CPC, Hook Rate (3-sec video views &divide; impressions), Frequency</td>
+            <td>CTR &gt; 1.5%, Hook Rate &gt; 25%, Frequency &lt; 3</td>
+          </tr>
+          <tr>
+            <td><strong>Landing Page</strong></td>
+            <td>Conversion Rate, Bounce Rate, Time on Page, Scroll Depth</td>
+            <td>CVR &gt; 20% (lead magnet), &gt; 8% (booking page)</td>
+          </tr>
+          <tr>
+            <td><strong>Lead</strong></td>
+            <td>CPL, Lead Quality Score, MQL Rate, Contact Rate</td>
+            <td>CPL within max allowable (Module 02)</td>
+          </tr>
+          <tr>
+            <td><strong>Booking</strong></td>
+            <td>Booking Rate, Show Rate, Cost per Show</td>
+            <td>Booking Rate &gt; 15%, Show Rate &gt; 60%</td>
+          </tr>
+          <tr>
+            <td><strong>Sale</strong></td>
+            <td>Close Rate, Average Sale Value, Revenue per Lead, CAC</td>
+            <td>Close Rate &gt; 20%, LTV:CAC &gt; 3:1</td>
+          </tr>
+          <tr>
+            <td><strong>Retention</strong></td>
+            <td>Churn Rate, LTV, NPS, Referral Rate</td>
+            <td>Monthly churn &lt; 5%, NPS &gt; 50</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <h3>Weekly Reporting Cadence</h3>
+  <p>Data without a rhythm becomes noise. Set a weekly cadence:</p>
+  <ol class="steps">
+    <li><strong>Monday: Pull the numbers.</strong> Export last week's metrics from Meta, Google, your CRM, and your email platform. Drop them into a single spreadsheet or dashboard.</li>
+    <li><strong>Tuesday: Flag anomalies.</strong> Any metric that moved more than 20% week-over-week gets flagged. Look for causes: did you launch new creative? Did a campaign exit learning phase? Did a competitor run a promotion?</li>
+    <li><strong>Wednesday: Decide actions.</strong> For each flagged metric, decide: investigate further, adjust (budget, audience, creative), or hold (not enough data yet). Write the action next to the flag.</li>
+    <li><strong>Thursday&ndash;Friday: Execute.</strong> Implement the actions. New creative, budget shifts, audience adjustments, page changes. Document what you changed and why.</li>
+  </ol>
+
+  <h3>When to Act vs When to Wait</h3>
+
+  <div class="grid-2">
+    <div class="card">
+      <div class="card-title">Act Immediately</div>
+      <p>Ad spend running with zero conversions for 2+ days. CPL more than 2x your target for 5+ days. Landing page conversion rate below 5%. Frequency above 4 on a cold audience. Any ad disapproved.</p>
+    </div>
+    <div class="card">
+      <div class="card-title">Wait for More Data</div>
+      <p>First 48 hours of a new campaign (learning phase). Weekly fluctuations under 20%. A/B tests with fewer than 100 conversions per variant. Seasonal dips you've seen before. Minor CPL increases during scaling.</p>
+    </div>
+  </div>
+
+  <div class="tip">
+    <div class="tip-label">Tip</div>
+    <p>Build your dashboard with <strong>three views</strong>: a daily snapshot (spend, leads, CPL), a weekly trend (all funnel metrics), and a monthly P&L (revenue, ad spend, profit, ROAS). Each view answers a different question: "Are we on track today?", "Are things getting better or worse?", "Are we making money?"</p>
+  </div>
+
+  <h3>Dashboard Setup</h3>
+  <p>Your first dashboard doesn't need to be fancy. A Google Sheet with three tabs works:</p>
+  <ul>
+    <li><strong>Tab 1 &mdash; Daily Tracker:</strong> Date, Platform, Spend, Impressions, Clicks, Leads, CPL, Bookings, Shows, Sales, Revenue. One row per day per platform.</li>
+    <li><strong>Tab 2 &mdash; Weekly Summary:</strong> Automatically calculated from Tab 1. Week number, total spend, total leads, avg CPL, booking rate, show rate, close rate, revenue, ROAS. Add conditional formatting: green if above target, red if below.</li>
+    <li><strong>Tab 3 &mdash; Monthly P&L:</strong> Revenue minus ad spend minus fulfilment cost = profit. Show month-over-month trend.</li>
+  </ul>
+
+  <div class="exercise">
+    <div class="exercise-label">Exercise &mdash; Build Your First Dashboard</div>
+    <ul class="checklist">
+      <li>Create a Google Sheet with the three tabs described above.</li>
+      <li>Fill in the last 7 days of data from your ad platforms and CRM.</li>
+      <li>Calculate your current CPL, show rate, close rate, and ROAS.</li>
+      <li>Compare each metric to the benchmarks table. Flag any that fall short.</li>
+      <li>Set a calendar reminder for Monday morning: "Pull weekly numbers."</li>
+    </ul>
+  </div>
+</section>
+
+<!-- MODULE 6: AD POLICY & COMPLIANCE -->
+<section class="module" id="policy">
+  <div class="module-num">Module 06</div>
+  <h2>Ad Policy &amp; Compliance</h2>
+  <p class="module-lead">The summit teaches powerful copy techniques &mdash; neuromarketing, green brain hooks, pain-point agitation. This module teaches where the line is, so your ads don't get rejected or your account shut down.</p>
+
+  <h3>Meta Ad Policies That Catch Marketers</h3>
+  <p>Meta's ad review is a mix of automated scanning and human review. These are the policies that trip up marketers using the summit's techniques:</p>
+
+  <div class="framework">
+    <div class="framework-title">The Big Five Rejection Triggers</div>
+    <ol class="steps">
+      <li><strong>Personal Attributes.</strong> You cannot assert or imply knowledge of someone's personal characteristics. "Are you struggling with weight loss?" calls out a personal attribute. "Many people find weight loss challenging" doesn't. Never use "you" + a personal problem in the same sentence.</li>
+      <li><strong>Before/After Claims.</strong> Implied or explicit before/after results (especially in images) are restricted in health, fitness, and finance. Show process, not transformation. "Here's what we teach" is safe; "Look at this client's results" needs careful handling.</li>
+      <li><strong>Income/Earnings Claims.</strong> "Make $10K in 30 days" will get rejected. Even implied earnings ("What would you do with an extra $10K?") can trigger review. Use lifestyle language instead of specific numbers. Screenshots of results need disclaimers.</li>
+      <li><strong>Sensational Content.</strong> Exaggerated claims, shock tactics, or misleading clickbait. "Doctors HATE this trick" is dead. "This approach helped 200+ clients" is fine. The neuromarketing hooks from the summit are powerful &mdash; just don't cross into sensational.</li>
+      <li><strong>Landing Page Mismatch.</strong> Your ad promises one thing; your landing page delivers another. Meta checks the destination. If the ad says "free guide" and the page immediately asks for a credit card, that's a policy violation.</li>
+    </ol>
+  </div>
+
+  <h3>Google Ads Policies</h3>
+  <p>Google is stricter than Meta on certain fronts:</p>
+  <ul>
+    <li><strong>Trademark policy:</strong> You can bid on competitor keywords, but you generally can't use their trademarked name in your ad <em>text</em> (the rules vary by region and whether the trademark holder has filed a complaint).</li>
+    <li><strong>Healthcare restrictions:</strong> Ads for health-related services require certification in many countries. Check Google's restricted categories for your market.</li>
+    <li><strong>Click-to-call ads:</strong> The phone number in the ad must match the one on your landing page.</li>
+    <li><strong>Editorial standards:</strong> No excessive capitalisation, no gimmicky punctuation ("F.R.E.E!!!"), no repeated exclamation marks.</li>
+  </ul>
+
+  <h3>Writing Compliant Copy That Still Converts</h3>
+
+  <div class="grid-2">
+    <div class="card">
+      <div class="card-title">Instead of Direct Claims</div>
+      <p><strong>Risky:</strong> "Lose 10kg in 30 days"<br>
+      <strong>Compliant:</strong> "A structured approach to sustainable weight loss"</p>
+      <p><strong>Risky:</strong> "Make $50K/month from home"<br>
+      <strong>Compliant:</strong> "Build a business that supports the lifestyle you want"</p>
+    </div>
+    <div class="card">
+      <div class="card-title">Instead of Personal Callouts</div>
+      <p><strong>Risky:</strong> "Are you tired of failing?"<br>
+      <strong>Compliant:</strong> "When results aren't matching the effort"</p>
+      <p><strong>Risky:</strong> "Your debt is out of control"<br>
+      <strong>Compliant:</strong> "Taking control of your financial future"</p>
+    </div>
+  </div>
+
+  <h3>Account Health</h3>
+  <ul>
+    <li><strong>Multiple ad accounts:</strong> Run your main campaigns from a Business Manager with a verified business. Set up a backup ad account (same Business Manager, different payment method). If your primary gets restricted, you can appeal while still running from the backup.</li>
+    <li><strong>Appeal process:</strong> When an ad is rejected, don't just edit and resubmit. Request a manual review first &mdash; automated rejections are often wrong. If the review upholds the rejection, then edit the ad to comply and resubmit.</li>
+    <li><strong>Gradual reputation:</strong> New ad accounts are on a short leash. Start with simple, clearly compliant ads. Build a history of approved ads before running anything aggressive.</li>
+  </ul>
+
+  <div class="warning">
+    <div class="warning-label">Common Mistake</div>
+    <p>Using the summit's pain-agitation hooks word-for-word as ad copy. Those frameworks are for structuring your message; the execution needs to be policy-compliant. "Your life is falling apart because you can't get clients" is powerful in a video script but will get flagged as a personal-attribute violation in ad text. Reframe the same emotion: "When client flow dries up, everything feels harder."</p>
+  </div>
+
+  <div class="exercise">
+    <div class="exercise-label">Exercise &mdash; Policy-Proof Your Copy</div>
+    <ul class="checklist">
+      <li>Take your three best-performing ad copy pieces.</li>
+      <li>Highlight any sentence that uses "you" + a personal problem, a specific number/result, or a before/after implication.</li>
+      <li>Rewrite each highlighted sentence using the compliant alternatives above.</li>
+      <li>Check your landing pages: does the page deliver exactly what the ad promises?</li>
+      <li>Review your ad account health in Meta Business Manager &rarr; Account Quality.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- MODULE 7: POST-SALE LOOP -->
+<section class="module" id="postsale">
+  <div class="module-num">Module 07</div>
+  <h2>Post-Sale &amp; Referral Loop</h2>
+  <p class="module-lead">The summit's funnel ends at the sale. This module builds what happens after &mdash; the onboarding, retention, and referral systems that turn one customer into three.</p>
+
+  <h3>Why Post-Sale Is a Marketing Function</h3>
+  <p>Most businesses treat post-sale as "operations" and disconnect it from marketing. But the highest-leverage marketing activity isn't acquiring a new customer &mdash; it's keeping an existing one and getting them to send you another. A referred customer has:</p>
+  <ul>
+    <li><strong>Zero acquisition cost</strong> (you didn't pay for the ad).</li>
+    <li><strong>Higher trust</strong> (they were referred by someone they know).</li>
+    <li><strong>Higher close rate</strong> (typically 2&ndash;4x cold leads).</li>
+    <li><strong>Higher LTV</strong> (referred customers retain longer on average).</li>
+  </ul>
+
+  <h3>The Onboarding Sequence</h3>
+  <p>The first 48 hours after purchase determine retention. Use the summit's nurture sequence skills to build a post-sale version:</p>
+
+  <div class="framework">
+    <div class="framework-title">7-Day Onboarding Sequence</div>
+    <ol class="steps">
+      <li><strong>Immediately: Welcome &amp; access.</strong> Send login details, a welcome video, and the single first step they should take. Don't overwhelm with everything at once. Use the "one next action" principle.</li>
+      <li><strong>Day 1: Check-in &amp; quick win.</strong> "Did you get in okay?" + guide them to complete the easiest, most rewarding first task. This creates an early success that builds momentum.</li>
+      <li><strong>Day 3: Social proof &amp; community.</strong> Introduce them to your community (Facebook group, Slack, Circle). Share a success story from someone who was in their position. Apply the summit's testimonial framework here.</li>
+      <li><strong>Day 5: Deeper engagement.</strong> Point them to the next milestone. "You've done X; here's what to tackle this week." This prevents the "I bought it and never used it" churn.</li>
+      <li><strong>Day 7: Feedback &amp; referral seed.</strong> Ask how the first week went. Plant the referral seed (don't ask yet): "We're so glad you're here. We grew entirely through word of mouth from members like you."</li>
+    </ol>
+  </div>
+
+  <h3>The Referral System</h3>
+  <p>Don't hope for referrals. Build a system:</p>
+
+  <div class="framework">
+    <div class="framework-title">The 3-Trigger Referral System</div>
+    <p>Ask for referrals at three specific moments &mdash; the moments of highest satisfaction:</p>
+    <ol class="steps">
+      <li><strong>After the first win.</strong> When the customer achieves their first result, they're excited and want to tell someone. Send: "Congratulations on [specific result]! Know anyone else who'd want this? Here's a link to send them &mdash; they'll get [incentive] and so will you."</li>
+      <li><strong>At the retention milestone.</strong> When a customer has been with you 3&ndash;6 months, they're a proven success case. Send: "You've been with us for [X months] and achieved [specific outcome]. We'd love to help someone in your network too. Would you be open to introducing us?"</li>
+      <li><strong>At renewal or repurchase.</strong> The act of buying again confirms satisfaction. Add a referral prompt to the confirmation page or email: "Welcome back! Share your experience with a friend &mdash; you'll both get [incentive]."</li>
+    </ol>
+  </div>
+
+  <h3>Referral Incentive Structures</h3>
+  <div class="grid-2">
+    <div class="card">
+      <div class="card-title">Two-Sided Incentive</div>
+      <p>Both referrer and referred get something. "Give $50, get $50." This removes the awkwardness of asking a friend to buy something. Works best for products under $500.</p>
+    </div>
+    <div class="card">
+      <div class="card-title">Status-Based Incentive</div>
+      <p>Referrers earn status: VIP access, early features, a title ("Ambassador"). Works for communities and memberships. Costs nothing and creates identity-driven loyalty.</p>
+    </div>
+  </div>
+
+  <h3>Review Generation</h3>
+  <p>Reviews are referrals at scale. Build collection into your process:</p>
+  <ul>
+    <li><strong>Timing:</strong> Ask 24&ndash;48 hours after a positive milestone, not immediately after purchase (they haven't experienced the product yet).</li>
+    <li><strong>Make it effortless:</strong> Send a direct link to Google/Facebook/Trustpilot review page. Don't ask them to "find you and leave a review." Every click you remove doubles completion rate.</li>
+    <li><strong>Give a prompt:</strong> "What was your situation before working with us, and what's changed?" This produces the before/after narrative that converts future buyers &mdash; aligning with the summit's testimonial framework.</li>
+    <li><strong>Video reviews:</strong> For high-value services, ask for a 60-second video. Offer to send them three questions to answer on camera. These become Testimonial 2.0 ads.</li>
+  </ul>
+
+  <h3>Upsell &amp; Cross-Sell</h3>
+  <p>An existing customer who trusts you is 5&ndash;25x more likely to buy than a cold prospect. Map your upsell path:</p>
+  <div class="formula">
+    <div><span class="label">Entry Offer</span> &rarr; <span class="label">Core Offer</span> &rarr; <span class="label">Premium Offer</span></div>
+    <div style="margin-top: 0.5rem;">Example: Free audit &rarr; Monthly management &rarr; Done-for-you build + strategy</div>
+    <div style="margin-top: 0.5rem;">Each step up solves a bigger version of the same problem.</div>
+  </div>
+
+  <div class="tip">
+    <div class="tip-label">Tip</div>
+    <p>The best upsell moment is when the customer <em>achieves</em> the outcome of their current tier. "You've hit 50 leads/month consistently. Most clients at this stage need help closing them &mdash; that's what our sales coaching tier is for." This is a natural next step, not a hard sell.</p>
+  </div>
+
+  <div class="exercise">
+    <div class="exercise-label">Exercise &mdash; Build Your Post-Sale Loop</div>
+    <ul class="checklist">
+      <li>Write a 5-email onboarding sequence for your product/service using the 7-day framework above.</li>
+      <li>Identify your three referral trigger moments. Write the ask for each one.</li>
+      <li>Choose a referral incentive structure and calculate the cost per referral vs your current CAC.</li>
+      <li>Set up an automated review request that fires 48 hours after the customer's first milestone.</li>
+      <li>Map your upsell path: entry &rarr; core &rarr; premium. What's missing from the ladder?</li>
+    </ul>
+  </div>
+</section>
+
+</div>
+
+<div class="footer">
+  <span>Where U? Summit</span> &middot; Training Supplement &middot; 7 modules covering curriculum gaps<br>
+  Companion to the Summit Playbook and Gap Analysis
+</div>
