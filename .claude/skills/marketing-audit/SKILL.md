@@ -113,7 +113,7 @@ Read `references/execution-systems.md` for the nine systems, their SOP structure
 - Where the gap analysis rated a skill missing or partial, use the training supplement's framework for that step and say so.
 - Decision rules are the product. Every "it depends" the operator would face gets a pre-made answer (thresholds, minimums, kill rules, cadences).
 
-**Tool hooks:** If the AdWhispr ad connector (or similar ad-platform tooling) is available in the session, note in each system which tool performs the step (competitor discovery, brief generation, campaign launch, budget changes, performance pulls). If not, write the manual equivalent. The SOP works either way.
+**Tool hooks:** The connector map in `references/execution-systems.md` lists which integrations can perform which step (ad research and launch, product data, creative generation, CRM, insights, dashboard). For each system, name the integrations the user actually has available and write the manual equivalent for the rest. The SOP has to work either way.
 
 Publish as an artifact and save to the repo as `execution-systems.html`.
 

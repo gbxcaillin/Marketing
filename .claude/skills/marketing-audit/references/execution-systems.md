@@ -8,6 +8,27 @@ Zeely's published weaknesses are also instructive. Reviewers flag no competitor 
 
 Build one system per section below. Each system is a one-page SOP with: **trigger** (when it runs), **inputs**, **steps**, **decision rules** (pre-made choices so the operator doesn't deliberate), **outputs**, and **owner**. Fill each SOP with the company's own frameworks from the playbook wherever one exists, and with the training supplement's frameworks where it doesn't.
 
+## Connector map
+
+Before writing the tool hooks, check which of these connectors are live in the session (`ListConnectors`, and `COMPOSIO_SEARCH_TOOLS` for apps bridged through Composio). Name the live ones in each system's hook; write the manual fallback for the rest. A connector that is installed but not authenticated counts as absent.
+
+| Connector | What it gives the pipeline | Systems |
+|---|---|---|
+| **AdWhispr** | Verified competitor discovery, live ads by longevity, brief generation, Meta/Google/TikTok launch and management. Needs `connect_ad_account` before launch or performance tools work. | 1, 5, 8 |
+| **Shopify** | Real product data (title, images, price, variants) instead of a scraped URL; the product page as the sales page; orders and customers for post-sale; analytics for blended ROAS. | 2, 7, 8, post-sale |
+| **Canva** | Brand kits (`list-brand-kits`), on-brand static generation (`generate-design`), the three-size step (`resize-design`), export, and any existing ad assets to remix (`search-designs`). | 3 |
+| **OpenArt** | Image and video generation for concepts Canva can't produce: image-to-video, avatar-style clips. | 3 |
+| **Composio → HighLevel** | The CRM the summit runs on: contacts, pipelines, opportunities, tasks. Lead tracker source of truth, booking and nurture triggers. Needs an auth config set up once in the Composio dashboard. | 7, 8, nurture |
+| **Composio → Meta Ads** | Account and campaign insights (`METAADS_GET_INSIGHTS`) for the Monday pull; ad and campaign objects for management. | 5, 8 |
+| **Composio → Google Ads** | Campaign lookup, customer lists for brand and search campaigns. | 5 |
+| **Composio → Google Sheets** | The three-tab dashboard and lead tracker: append rows, read ranges, upsert. | 8 |
+| **Composio → SendGrid / Brevo** | Sends, lists, sender identities for nurture and deliverability checks. | nurture, email |
+| **Composio → Firecrawl** | Product-link scrape for clients not on Shopify. | 2 |
+| **Google Drive, Dropbox, SharePoint (Microsoft 365)** | Where client collateral lives for Phase 1, and where to store the four deliverables. SharePoint often holds client compliance standards that the Compliance Gate must absorb (e.g. an AFSL licensee's marketing standard for a financial-services client). | Phase 1, 6 |
+| **Cloudflare / Render** | Hosting for a generated sales page or a lead-tracker database when a spreadsheet is outgrown. | 7, 8 |
+
+Connectors with no role here (market data, travel, crypto) are simply not mentioned in the hooks.
+
 ---
 
 ## System 1: Competitor Intelligence
@@ -40,6 +61,7 @@ Build one system per section below. Each system is a one-page SOP with: **trigge
   5. Record the three proven angles and two differentiation angles from System 1.
 - **Decision rules:** One product per brief. If the URL has multiple products, make multiple briefs. If no price is present, the brief is for lead generation, not sales.
 - **Outputs:** A one-page Product Brief (template below). Everything downstream references it by name.
+- **Tool hook:** With Shopify, `get-product` / `search_products` pull the real product record and `get-shop-info` gives currency and market. Otherwise Composio's `FIRECRAWL_EXTRACT` on the URL, or manual entry.
 
 ```
 PRODUCT BRIEF — [name]
@@ -70,6 +92,7 @@ Compliance flags: [health / finance / income / personal attributes / none]
   5. **Voice pass.** Rewrite every headline and script line in the company's brand voice using their tone rules and banned-word list. This step is what separates the output from Zeely's "generic copy."
 - **Decision rules:** Minimum 5 creatives per ad set at launch (algorithms reward diversity). No more than 2 creatives sharing the same hook. Every batch includes at least one testimonial-format piece and one direct-offer piece.
 - **Outputs:** Creative Library entry per asset: concept, format, hook type, angle, sizes, status (draft / approved / live / retired).
+- **Tool hook:** With Canva, `list-brand-kits` for the brand guard, `generate-design` (with the brand kit) for each static concept, `resize-design` for the feed/story/landscape set, `search-designs` to find existing ad assets to remix, `export-design` for delivery. With OpenArt, `openart_generate_image` and `openart_generate_video` for image-to-video and avatar-style clips. Without either: Canva desktop and CapCut by hand.
 
 ## System 4: Copy Variants
 
@@ -101,7 +124,7 @@ Compliance flags: [health / finance / income / personal attributes / none]
   6. Submit to platform review. Log the campaign in the tracker with launch date, budget, and hypothesis ("we expect CPL under $X from the pain-hook angle").
 - **Decision rules:** Don't touch a new campaign for 72 hours. Scale a winner by no more than 20% every 3-5 days. Kill an ad set at 2× target CPA with zero conversions after 3 days. Duplicate rather than edit when a change is structural.
 - **Outputs:** Live campaign, tracker row, stated hypothesis.
-- **Tool hook:** With AdWhispr, `launch_meta_ad` / `launch_campaign` for Meta, `launch_search_campaign` or `launch_pmax_campaign` for Google, `launch_tiktok_campaign` for TikTok, and `update_budget`, `pause_campaign`, `resume_campaign` for management. This is where the company gets beyond Zeely's Meta-only limit.
+- **Tool hook:** With AdWhispr, `launch_meta_ad` / `launch_campaign` for Meta, `launch_search_campaign` or `launch_pmax_campaign` for Google, `launch_tiktok_campaign` for TikTok, and `update_budget`, `pause_campaign`, `resume_campaign` for management. This is where the company gets beyond Zeely's Meta-only limit. With Composio's Meta Ads and Google Ads toolkits, `METAADS_GET_AD_ACCOUNTS` / `METAADS_LIST_ADS` and `GOOGLEADS_GET_CAMPAIGN_BY_NAME` / `GOOGLEADS_CREATE_CUSTOMER_LIST` cover account checks and customer-list uploads for the data-hierarchy audiences.
 
 ## System 6: Compliance Gate
 
@@ -118,6 +141,7 @@ Compliance flags: [health / finance / income / personal attributes / none]
   6. Check category restrictions (health, finance, housing, employment, alcohol).
 - **Decision rules:** Any flag sends the asset back to System 3 or 4 with the flagged line and a compliant rewrite suggested. Nothing goes live with an open flag. A rejected ad gets a manual review request before any edit.
 - **Outputs:** Pass/fail with flagged lines and rewrites; account health log.
+- **Client-specific layer:** Regulated clients carry their own marketing standards on top of platform policy. Search the client's SharePoint, Drive or Dropbox for anything titled "marketing standard", "compliance", "disclosure" or "licensee" during Phase 1 and fold its rules into steps 1–6 as extra checks. A financial-services client under an AFSL, for example, needs the general-advice warning and disclosure page on every landing page.
 
 ## System 7: Sales Page Generator
 
@@ -135,6 +159,7 @@ Compliance flags: [health / finance / income / personal attributes / none]
   7. Payment or booking: Stripe/PayPal for purchases, calendar embed for calls, with the confirmation stack from the show-rate system wired up.
 - **Decision rules:** One page per Product Brief. One CTA type per page. Mobile layout is designed first. Page speed under 3 seconds or it doesn't launch.
 - **Outputs:** Page spec (section-by-section copy and layout), ready for a page builder or developer.
+- **Tool hook:** With Shopify, the product page is the sales page: `update-product` for copy and images, `create-discount` for the offer, `create-collection` to split pages by audience. With Composio's HighLevel toolkit, the booking funnel, calendar and confirmation workflow live there (`HIGHLEVEL_CREATE_OPPORTUNITY`, `HIGHLEVEL_UPSERT_CONTACT`). With Cloudflare or Render, host a static page from the spec. Otherwise GHL or the client's page builder by hand.
 
 ## System 8: Performance Loop
 
@@ -157,7 +182,7 @@ Compliance flags: [health / finance / income / personal attributes / none]
 - **Cadence:** Days 1-3 after launch: one check per day, no changes. Days 4-7: one check, act only on the "kill" rules. Week 2 onward: two or three checks per week. Every Monday: pull the week into the dashboard, flag any metric that moved more than 20%, decide, execute.
 - **Decision rules:** Sort ads by ROAS (or CPL for lead gen) and make at most two changes per session. Diagnose top-down: if CTR is fine and CPA is bad, the problem is the page or offer, not the ad. Refresh creative when frequency passes 3 or CTR decays 30% from its peak. Feed closed-won data back to the platform weekly so optimisation targets quality, not volume.
 - **Outputs:** Weekly dashboard row, change log with hypothesis and result, creative refresh requests to System 3.
-- **Tool hook:** With AdWhispr, `get_account_performance` and `list_campaigns` for the pull; `update_budget` and `pause_campaign` for the actions.
+- **Tool hook:** With AdWhispr, `get_account_performance` and `list_campaigns` for the pull; `update_budget` and `pause_campaign` for the actions. With Composio: `METAADS_GET_INSIGHTS` at campaign level for the Monday pull (one of `date_preset` or `time_range`, never both; KPI values arrive as strings and `actions` as arrays to normalise); `HIGHLEVEL_SEARCH_OPPORTUNITIES` for the tracker's booking → show → close columns; `GOOGLESHEETS_SPREADSHEETS_VALUES_APPEND` / `GOOGLESHEETS_VALUES_GET` to write and read the three tabs. With Shopify, `run-analytics-query` or `list-orders` for the revenue side of blended ROAS. Without them: platform exports into the sheet by hand.
 
 ## System 9: Organic Distribution
 
@@ -197,7 +222,7 @@ Produce one HTML artifact, `execution-systems.html`, structured as an operating 
 1. A one-screen pipeline diagram: Competitor Intel → Intake → Creative Factory → Copy → Compliance → Launch → Sales Page → Performance Loop, with Organic Distribution as a parallel track.
 2. One section per system, each as the SOP block (trigger, inputs, steps, decision rules, outputs, owner), filled with the company's own frameworks by name.
 3. The Product Brief template and the seven-metric table as copy-ready blocks.
-4. A "tool hooks" note per system: what to use if the AdWhispr connector (or the company's own ad platform tooling) is present, and the manual equivalent if not.
+4. A "tool hooks" note per system: which of the live connectors from the connector map performs the step, and the manual equivalent if none is live.
 5. A closing "first 30 days" rollout: which system to stand up each week.
 
 Design it as a manual people operate from, not a document they read once: dense, scannable, with every decision rule visually distinct from the explanatory text. Load `artifact-design` first, and give it a fourth distinct identity so the four deliverables read as a set.
