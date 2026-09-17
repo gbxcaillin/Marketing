@@ -1,14 +1,15 @@
 ---
 name: marketing-audit
-description: "Audit any company's marketing collateral against a 24-skill framework. Use this skill whenever someone uploads marketing materials (PDFs, slides, docs, training decks, course content, SOPs) and wants them analysed, audited, summarised, or gap-checked — even if they just say 'look through these' or 'what are we missing.' Also use when someone asks to build training material, a playbook, or supplementary content from existing marketing assets. Works for agencies, course creators, membership programs, SaaS, e-commerce — any business with marketing collateral to assess."
+description: "Audit any company's marketing collateral against a 24-skill framework, then turn it into operating systems. Use this skill whenever someone uploads marketing materials (PDFs, slides, docs, training decks, course content, SOPs) and wants them analysed, audited, summarised, or gap-checked — even if they just say 'look through these' or 'what are we missing.' Also use when someone asks to build training material, a playbook, SOPs, or supplementary content from existing marketing assets, or wants a Zeely-style pipeline (product link → creatives → campaign launch → sales page → performance loop) built from their own frameworks. Works for agencies, course creators, membership programs, SaaS, e-commerce — any business with marketing collateral to assess."
 ---
 
 # Marketing Audit
 
-Turn a pile of marketing collateral into three structured deliverables:
+Turn a pile of marketing collateral into four structured deliverables:
 1. **Playbook** — everything the material teaches, organised by topic
 2. **Gap Analysis** — what's covered and what's missing against a 24-skill marketing framework
 3. **Training Supplement** — ready-to-use training modules for every gap
+4. **Execution Systems** — nine repeatable operating systems (modelled on Zeely's product-link-to-campaign pipeline) built from the company's own frameworks
 
 ## When to use this skill
 
@@ -17,6 +18,7 @@ Turn a pile of marketing collateral into three structured deliverables:
 - Someone wants existing material turned into a structured playbook
 - Someone needs training material built for skill gaps
 - Someone says "ingest," "summarise," "gap analysis," or "what skills do we cover"
+- Someone wants their marketing knowledge turned into SOPs, systems, or a launch pipeline ("like Zeely," "so anyone on the team can run it")
 
 ## The 24-Skill Marketing Framework
 
@@ -100,12 +102,27 @@ Read `references/training-patterns.md` for the module structure and content guid
 
 Publish as an artifact and save to the repo as `training-supplement.html`.
 
-### Phase 5: Commit & Deliver
+### Phase 5: Execution Systems
 
-1. Save all three HTML files to the repo
+Knowledge doesn't run campaigns. This phase converts the playbook and supplement into nine operating systems a team runs the same way every time, modelled on Zeely's pipeline: product link in, creatives and copy generated in batch, campaign launched from one screen with a calculated budget, compliance checked, sales page generated, performance managed on a fixed cadence. Zeely's value is that every operator decision is pre-decided by a system; that's what to reproduce, using the company's own frameworks instead of generic AI output.
+
+Read `references/execution-systems.md` for the nine systems, their SOP structure, decision rules, the 24-skill mapping, and the artifact spec.
+
+**How to fill each system:**
+- Where the playbook already has a framework for a step (their hook formula, their targeting hierarchy, their testimonial structure), name it and use it. The system should feel like *theirs*, codified.
+- Where the gap analysis rated a skill missing or partial, use the training supplement's framework for that step and say so.
+- Decision rules are the product. Every "it depends" the operator would face gets a pre-made answer (thresholds, minimums, kill rules, cadences).
+
+**Tool hooks:** If the AdWhispr ad connector (or similar ad-platform tooling) is available in the session, note in each system which tool performs the step (competitor discovery, brief generation, campaign launch, budget changes, performance pulls). If not, write the manual equivalent. The SOP works either way.
+
+Publish as an artifact and save to the repo as `execution-systems.html`.
+
+### Phase 6: Commit & Deliver
+
+1. Save all four HTML files to the repo
 2. Commit with a descriptive message
 3. Push to the current branch
-4. Summarise what was found: how many documents ingested, coverage stats, and the biggest gaps
+4. Summarise what was found: how many documents ingested, coverage stats, the biggest gaps, and which systems are ready to run on day one
 
 ## Adapting to the Company
 
@@ -122,4 +139,5 @@ Sometimes people only want part of the workflow:
 - "Summarise these" → Phase 1 + 2 only (ingest and playbook)
 - "What are we missing" → Phase 1 + 3 only (ingest and gap analysis)
 - "Build training for our gaps" → Assumes Phase 1-3 are done; do Phase 4 only
+- "Turn this into systems / SOPs / a launch pipeline" → Assumes Phase 1-2 are done (needs the playbook's frameworks); do Phase 5 only
 - "Full audit" → All phases
