@@ -26,6 +26,16 @@ Before writing the tool hooks, check which of these connectors are live in the s
 | **Composio → Firecrawl** | Product-link scrape for clients not on Shopify. | 2 |
 | **Google Drive, Dropbox, SharePoint (Microsoft 365)** | Where client collateral lives for Phase 1, and where to store the four deliverables. SharePoint often holds client compliance standards that the Compliance Gate must absorb (e.g. an AFSL licensee's marketing standard for a financial-services client). | Phase 1, 6 |
 | **Cloudflare / Render** | Hosting for a generated sales page or a lead-tracker database when a spreadsheet is outgrown. | 7, 8 |
+| **Composio → Microsoft Clarity** | Session recordings, heatmaps, scroll depth via data export. The summit's named tool for qualitative page feedback. | 7, 8 |
+| **Composio → Instagram / TikTok** | Organic publishing (`INSTAGRAM_POST_IG_USER_MEDIA_PUBLISH`, `TIKTOK_PUBLISH_VIDEO`) for the Organic Track. | 9 |
+| **Composio → HeyGen** | Avatar-led UGC video, Zeely's signature format. Use for talking-head concepts OpenArt can't produce. | 3 |
+| **Composio → Google Analytics** | Landing page and conversion reports from the source rather than the ad platform. | 8 |
+| **Composio → Klaviyo** | Email and SMS flows and lists for Shopify clients. Nurture and post-sale automation. | nurture, post-sale |
+| **Composio → TikTok Ads** | Campaign creation and management. Backup to AdWhispr for TikTok. | 5 |
+| **Composio → Slack** | Monday performance summary and creative-refresh requests to the team. | 8 |
+| **Motion Creative Analytics** (registry) | Creative-level Meta insights and competitor ad libraries: which hooks fatigue, which formats hold. | 1, 3, 8 |
+| **Semrush** (registry) | Keyword research, competitor domains and PPC data for non-brand Google Search. | 1, 5 |
+| **Airtable / Notion** (registry or Composio) | A database for the Creative Library and change log with status fields, once a spreadsheet is outgrown. | 3, 8 |
 
 Connectors with no role here (market data, travel, crypto) are simply not mentioned in the hooks.
 
