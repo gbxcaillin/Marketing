@@ -1,0 +1,864 @@
+<title>Where U? Operating Manual</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=Red+Hat+Mono:wght@400;500;600&display=swap">
+<style>
+:root {
+  --ground: #EEF1F4;
+  --panel: #FFFFFF;
+  --panel-alt: #F6F8FA;
+  --ink: #14202B;
+  --ink-2: #4B5865;
+  --ink-3: #8A95A0;
+  --line: #D5DBE1;
+  --line-strong: #B9C2CB;
+  --signal: #1D5FD1;
+  --signal-soft: #E6EEFB;
+  --rule: #C8681A;
+  --rule-soft: #FBF0E4;
+  --theirs: #2F7D5B;
+  --theirs-soft: #E4F2EB;
+  --gap: #A0522D;
+  --gap-soft: #F6E9E3;
+  --tool: #5B4FBF;
+  --tool-soft: #ECEAF8;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --ground: #0F1519;
+    --panel: #182027;
+    --panel-alt: #1F2931;
+    --ink: #E6EBEF;
+    --ink-2: #A8B3BD;
+    --ink-3: #6E7A85;
+    --line: #2A353F;
+    --line-strong: #3A4752;
+    --signal: #6FA0F5;
+    --signal-soft: #1A2A44;
+    --rule: #E8944A;
+    --rule-soft: #34261A;
+    --theirs: #63B78F;
+    --theirs-soft: #182E25;
+    --gap: #D98A66;
+    --gap-soft: #33241D;
+    --tool: #A79CF0;
+    --tool-soft: #262340;
+  }
+}
+:root[data-theme="dark"] {
+  --ground: #0F1519;
+  --panel: #182027;
+  --panel-alt: #1F2931;
+  --ink: #E6EBEF;
+  --ink-2: #A8B3BD;
+  --ink-3: #6E7A85;
+  --line: #2A353F;
+  --line-strong: #3A4752;
+  --signal: #6FA0F5;
+  --signal-soft: #1A2A44;
+  --rule: #E8944A;
+  --rule-soft: #34261A;
+  --theirs: #63B78F;
+  --theirs-soft: #182E25;
+  --gap: #D98A66;
+  --gap-soft: #33241D;
+  --tool: #A79CF0;
+  --tool-soft: #262340;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+body {
+  background: var(--ground);
+  color: var(--ink);
+  font-family: 'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif;
+  font-size: 15.5px;
+  line-height: 1.6;
+}
+a { color: var(--signal); }
+a:focus-visible, button:focus-visible { outline: 2px solid var(--signal); outline-offset: 2px; }
+
+.mono {
+  font-family: 'Red Hat Mono', 'SFMono-Regular', Menlo, monospace;
+}
+
+/* ---------- masthead ---------- */
+.mast {
+  border-bottom: 2px solid var(--ink);
+  background: var(--panel);
+  padding: 2.25rem 1rem 1.75rem;
+}
+.mast-inner { max-width: 76rem; margin: 0 auto; }
+.mast-kicker {
+  font-family: 'Red Hat Mono', monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+  display: flex; gap: 1rem; flex-wrap: wrap;
+}
+.mast h1 {
+  font-family: 'Archivo', sans-serif;
+  font-weight: 800;
+  font-size: clamp(1.9rem, 4.5vw, 3rem);
+  line-height: 1.05;
+  letter-spacing: -0.01em;
+  margin: 0.6rem 0 0.75rem;
+  text-wrap: balance;
+}
+.mast p { max-width: 44rem; color: var(--ink-2); font-size: 1.02rem; }
+.legend { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 1.1rem; }
+.tag {
+  font-family: 'Red Hat Mono', monospace;
+  font-size: 0.68rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase;
+  padding: 0.22rem 0.5rem; border-radius: 3px; white-space: nowrap;
+}
+.tag-theirs { background: var(--theirs-soft); color: var(--theirs); }
+.tag-gap { background: var(--gap-soft); color: var(--gap); }
+.tag-rule { background: var(--rule-soft); color: var(--rule); }
+.tag-tool { background: var(--tool-soft); color: var(--tool); }
+.tag-skill { background: var(--panel-alt); color: var(--ink-2); border: 1px solid var(--line); text-transform: none; letter-spacing: 0; font-family: 'IBM Plex Sans', sans-serif; font-weight: 500; font-size: 0.72rem; }
+
+/* ---------- shell ---------- */
+.shell {
+  max-width: 76rem; margin: 0 auto; padding: 0 1rem;
+  display: grid; grid-template-columns: 15rem 1fr; gap: 2.5rem;
+}
+@media (max-width: 860px) { .shell { grid-template-columns: 1fr; gap: 0; } }
+
+.side { position: sticky; top: 0; align-self: start; padding-top: 1.5rem; max-height: 100vh; overflow-y: auto; }
+@media (max-width: 860px) {
+  .side { position: static; max-height: none; padding: 1rem 0 0; }
+  .side ol { display: flex; flex-wrap: wrap; gap: 0.35rem; }
+}
+.side-h { font-family: 'Red Hat Mono', monospace; font-size: 0.66rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-3); margin-bottom: 0.5rem; }
+.side ol { list-style: none; }
+.side li a {
+  display: flex; gap: 0.55rem; align-items: baseline;
+  text-decoration: none; color: var(--ink-2); font-size: 0.85rem; font-weight: 500;
+  padding: 0.32rem 0.45rem; border-radius: 4px; border-left: 2px solid transparent;
+}
+.side li a:hover { background: var(--panel); color: var(--ink); border-left-color: var(--signal); }
+.side li a .n { font-family: 'Red Hat Mono', monospace; font-size: 0.7rem; color: var(--ink-3); min-width: 1.3rem; }
+.side .sep { height: 1px; background: var(--line); margin: 0.6rem 0.45rem; }
+
+.main { padding: 1.5rem 0 3rem; min-width: 0; }
+
+/* ---------- pipeline ---------- */
+.pipe-wrap { background: var(--panel); border: 1px solid var(--line); border-radius: 6px; padding: 1.25rem; margin-bottom: 2rem; overflow-x: auto; }
+.pipe-title { font-family: 'Archivo', sans-serif; font-weight: 700; font-size: 1.05rem; margin-bottom: 0.9rem; }
+.pipe { display: flex; align-items: stretch; gap: 0; min-width: 52rem; }
+.stage { flex: 1; position: relative; padding: 0.7rem 0.6rem 0.7rem 0.85rem; background: var(--panel-alt); border: 1px solid var(--line); border-right: none; }
+.stage:first-child { border-radius: 4px 0 0 4px; }
+.stage:last-child { border-right: 1px solid var(--line); border-radius: 0 4px 4px 0; }
+.stage::after {
+  content: ''; position: absolute; right: -9px; top: 50%; transform: translateY(-50%);
+  border-left: 9px solid var(--line-strong); border-top: 9px solid transparent; border-bottom: 9px solid transparent; z-index: 2;
+}
+.stage:last-child::after { display: none; }
+.stage .n { font-family: 'Red Hat Mono', monospace; font-size: 0.66rem; color: var(--signal); font-weight: 600; }
+.stage .t { font-family: 'Archivo', sans-serif; font-weight: 700; font-size: 0.82rem; line-height: 1.2; margin-top: 0.15rem; }
+.stage .z { font-size: 0.7rem; color: var(--ink-3); margin-top: 0.2rem; }
+.pipe-par { display: flex; align-items: center; gap: 0.75rem; margin-top: 0.8rem; min-width: 52rem; }
+.pipe-par .bar { flex: 1; height: 1px; background: repeating-linear-gradient(90deg, var(--line-strong) 0 6px, transparent 6px 12px); }
+.pipe-par .stage { flex: 0 0 15rem; border-right: 1px solid var(--line); border-radius: 4px; }
+.pipe-par .stage::after { display: none; }
+.pipe-note { font-size: 0.82rem; color: var(--ink-2); margin-top: 0.9rem; max-width: 60rem; }
+
+/* ---------- systems ---------- */
+.sys { background: var(--panel); border: 1px solid var(--line); border-radius: 6px; margin-bottom: 1.75rem; overflow: hidden; }
+.sys-head { padding: 1.25rem 1.5rem 1rem; border-bottom: 1px solid var(--line); display: grid; grid-template-columns: auto 1fr; gap: 1rem 1.25rem; align-items: start; }
+.sys-num {
+  font-family: 'Archivo', sans-serif; font-weight: 800; font-size: 2.2rem; line-height: 1; color: var(--signal);
+  font-variant-numeric: tabular-nums;
+}
+.sys-head h2 { font-family: 'Archivo', sans-serif; font-weight: 700; font-size: 1.35rem; line-height: 1.15; text-wrap: balance; }
+.sys-model { font-size: 0.85rem; color: var(--ink-2); margin-top: 0.3rem; }
+.sys-model b { color: var(--ink); font-weight: 600; }
+.sys-skills { display: flex; flex-wrap: wrap; gap: 0.35rem; margin-top: 0.6rem; }
+
+.meta { display: grid; grid-template-columns: repeat(3, 1fr); border-bottom: 1px solid var(--line); background: var(--panel-alt); }
+@media (max-width: 640px) { .meta { grid-template-columns: 1fr; } }
+.meta > div { padding: 0.8rem 1.5rem; border-right: 1px solid var(--line); font-size: 0.88rem; }
+.meta > div:last-child { border-right: none; }
+@media (max-width: 640px) { .meta > div { border-right: none; border-bottom: 1px solid var(--line); } .meta > div:last-child { border-bottom: none; } }
+.meta .k { font-family: 'Red Hat Mono', monospace; font-size: 0.64rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-3); margin-bottom: 0.2rem; }
+
+.sys-body { padding: 1.25rem 1.5rem 1.5rem; display: grid; grid-template-columns: 1.4fr 1fr; gap: 1.5rem; }
+@media (max-width: 900px) { .sys-body { grid-template-columns: 1fr; } }
+.sys-body h3 { font-family: 'Red Hat Mono', monospace; font-size: 0.66rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-3); margin: 0 0 0.6rem; }
+.sys-body p { margin-bottom: 0.7rem; }
+.sys-body .col > * + h3 { margin-top: 1.25rem; }
+
+ol.steps { list-style: none; counter-reset: s; }
+ol.steps li { counter-increment: s; position: relative; padding-left: 2rem; margin-bottom: 0.65rem; }
+ol.steps li::before {
+  content: counter(s, decimal-leading-zero); position: absolute; left: 0; top: 0.2rem;
+  font-family: 'Red Hat Mono', monospace; font-size: 0.72rem; font-weight: 600; color: var(--signal);
+}
+ul.plain { list-style: none; }
+ul.plain li { position: relative; padding-left: 1rem; margin-bottom: 0.4rem; }
+ul.plain li::before { content: ''; position: absolute; left: 0; top: 0.65rem; width: 5px; height: 5px; background: var(--ink-3); border-radius: 1px; }
+
+.theirs {
+  display: inline; font-weight: 600; color: var(--theirs);
+  border-bottom: 1.5px solid var(--theirs);
+}
+.gapref { display: inline; font-weight: 600; color: var(--gap); border-bottom: 1.5px dashed var(--gap); }
+
+.rules {
+  background: var(--rule-soft); border: 1px solid var(--rule); border-radius: 5px; padding: 1rem 1.1rem;
+}
+.rules h3 { color: var(--rule) !important; display: flex; align-items: center; gap: 0.45rem; }
+.rules h3::before { content: ''; width: 0.55rem; height: 0.55rem; background: var(--rule); transform: rotate(45deg); display: inline-block; }
+.rules ul { list-style: none; }
+.rules li { padding-left: 1.1rem; position: relative; margin-bottom: 0.5rem; font-size: 0.92rem; }
+.rules li::before { content: '→'; position: absolute; left: 0; color: var(--rule); font-weight: 600; }
+.rules li b { font-weight: 600; }
+
+.outputs { background: var(--panel-alt); border: 1px solid var(--line); border-radius: 5px; padding: 0.9rem 1.1rem; font-size: 0.92rem; }
+.outputs ul { list-style: none; }
+.outputs li { padding-left: 1.1rem; position: relative; margin-bottom: 0.3rem; }
+.outputs li::before { content: '▸'; position: absolute; left: 0; color: var(--ink-3); }
+
+.hook {
+  border-left: 3px solid var(--tool); background: var(--tool-soft); border-radius: 0 5px 5px 0;
+  padding: 0.8rem 1rem; font-size: 0.86rem; margin-top: 1.25rem;
+}
+.hook .k { font-family: 'Red Hat Mono', monospace; font-size: 0.64rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--tool); margin-bottom: 0.3rem; }
+.hook code { font-family: 'Red Hat Mono', monospace; font-size: 0.8rem; background: var(--panel); padding: 0.05rem 0.3rem; border-radius: 3px; border: 1px solid var(--line); }
+
+pre.block {
+  font-family: 'Red Hat Mono', monospace; font-size: 0.8rem; line-height: 1.65;
+  background: var(--panel-alt); border: 1px solid var(--line); border-radius: 5px; padding: 1rem 1.1rem; overflow-x: auto;
+  white-space: pre; color: var(--ink);
+}
+pre.block .c { color: var(--ink-3); }
+
+table { width: 100%; border-collapse: collapse; font-size: 0.88rem; font-variant-numeric: tabular-nums; }
+th { font-family: 'Red Hat Mono', monospace; font-size: 0.64rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-3); text-align: left; padding: 0.5rem 0.6rem; border-bottom: 2px solid var(--line-strong); }
+td { padding: 0.55rem 0.6rem; border-bottom: 1px solid var(--line); vertical-align: top; }
+td.act { color: var(--rule); font-weight: 600; }
+.tbl-wrap { overflow-x: auto; }
+
+/* ---------- section blocks ---------- */
+.sec { background: var(--panel); border: 1px solid var(--line); border-radius: 6px; padding: 1.4rem 1.5rem; margin-bottom: 1.75rem; }
+.sec h2 { font-family: 'Archivo', sans-serif; font-weight: 700; font-size: 1.3rem; margin-bottom: 0.4rem; }
+.sec .lead { color: var(--ink-2); margin-bottom: 1rem; max-width: 60rem; }
+
+.weeks { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.8rem; }
+@media (max-width: 900px) { .weeks { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 520px) { .weeks { grid-template-columns: 1fr; } }
+.wk { background: var(--panel-alt); border: 1px solid var(--line); border-radius: 5px; padding: 0.9rem 1rem; }
+.wk .k { font-family: 'Red Hat Mono', monospace; font-size: 0.66rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--signal); }
+.wk .t { font-family: 'Archivo', sans-serif; font-weight: 700; font-size: 0.95rem; margin: 0.2rem 0 0.5rem; }
+.wk ul { list-style: none; font-size: 0.86rem; }
+.wk li { padding-left: 0.9rem; position: relative; margin-bottom: 0.3rem; }
+.wk li::before { content: ''; position: absolute; left: 0; top: 0.6rem; width: 4px; height: 4px; background: var(--ink-3); }
+
+.down { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.8rem; }
+@media (max-width: 760px) { .down { grid-template-columns: 1fr; } }
+.down .d { border: 1px solid var(--line); border-radius: 5px; padding: 0.9rem 1rem; font-size: 0.88rem; }
+.down .d b { font-family: 'Archivo', sans-serif; font-weight: 700; display: block; margin-bottom: 0.3rem; }
+
+.foot { text-align: center; color: var(--ink-3); font-size: 0.8rem; padding: 1.5rem 1rem 2.5rem; border-top: 1px solid var(--line); margin-top: 1rem; }
+.foot b { color: var(--ink-2); font-weight: 600; }
+</style>
+
+<header class="mast">
+  <div class="mast-inner">
+    <div class="mast-kicker"><span>Where U? Summit</span><span>Execution Systems</span><span>Rev 1 · Sep 2026</span></div>
+    <h1>Nine systems that run the summit playbook the same way every time</h1>
+    <p>Zeely compresses "product link → ads → campaign → sales page → results" into minutes by pre-deciding every operator choice. This manual does the same with the summit's own frameworks in the driver's seat, and closes the four holes reviewers find in Zeely: no competitor research, generic copy, Meta-only, no optimisation rules.</p>
+    <div class="legend">
+      <span class="tag tag-theirs">Green underline = summit framework (speaker named)</span>
+      <span class="tag tag-gap">Dashed = from the training supplement (a gap)</span>
+      <span class="tag tag-rule">Orange box = decision rules, pre-made</span>
+      <span class="tag tag-tool">Purple = connector hook, with manual fallback</span>
+    </div>
+  </div>
+</header>
+
+<div class="shell">
+<aside class="side">
+  <div class="side-h">Systems</div>
+  <ol>
+    <li><a href="#s1"><span class="n">01</span>Competitor Intel</a></li>
+    <li><a href="#s2"><span class="n">02</span>Product Intake</a></li>
+    <li><a href="#s3"><span class="n">03</span>Creative Factory</a></li>
+    <li><a href="#s4"><span class="n">04</span>Copy Variants</a></li>
+    <li><a href="#s5"><span class="n">05</span>Campaign Launch</a></li>
+    <li><a href="#s6"><span class="n">06</span>Compliance Gate</a></li>
+    <li><a href="#s7"><span class="n">07</span>Sales Page</a></li>
+    <li><a href="#s8"><span class="n">08</span>Performance Loop</a></li>
+    <li><a href="#s9"><span class="n">09</span>Organic Track</a></li>
+    <div class="sep"></div>
+    <li><a href="#brief"><span class="n">§</span>Product Brief</a></li>
+    <li><a href="#metrics"><span class="n">§</span>Metric thresholds</a></li>
+    <li><a href="#rollout"><span class="n">§</span>30-day rollout</a></li>
+    <li><a href="#downstream"><span class="n">§</span>Downstream</a></li>
+  </ol>
+</aside>
+
+<main class="main">
+
+<div class="pipe-wrap">
+  <div class="pipe-title">The pipeline</div>
+  <div class="pipe">
+    <div class="stage"><div class="n">01</div><div class="t">Competitor Intel</div><div class="z">Zeely lacks this</div></div>
+    <div class="stage"><div class="n">02</div><div class="t">Product Intake</div><div class="z">"Generate from link"</div></div>
+    <div class="stage"><div class="n">03</div><div class="t">Creative Factory</div><div class="z">Creative Builder + Batch</div></div>
+    <div class="stage"><div class="n">04</div><div class="t">Copy Variants</div><div class="z">AI copy sets</div></div>
+    <div class="stage"><div class="n">06</div><div class="t">Compliance Gate</div><div class="z">Pre-launch review</div></div>
+    <div class="stage"><div class="n">07</div><div class="t">Sales Page</div><div class="z">AI sales page</div></div>
+    <div class="stage"><div class="n">05</div><div class="t">Campaign Launch</div><div class="z">One-screen launch</div></div>
+    <div class="stage"><div class="n">08</div><div class="t">Performance Loop</div><div class="z">7 metrics, fixed cadence</div></div>
+  </div>
+  <div class="pipe-par">
+    <div class="stage"><div class="n">09</div><div class="t">Organic Track</div><div class="z">"Viral campaigns" · runs in parallel, feeds 03 and 05</div></div>
+    <div class="bar"></div>
+  </div>
+  <p class="pipe-note">Order matters in one place: the summit says to set up conversion tracking when the landing pages are done, so the sales page (07) is built before launch (05). Everything from 01 to 04 happens before any money is spent.</p>
+</div>
+
+<!-- ============ SYSTEM 1 ============ -->
+<section class="sys" id="s1">
+  <div class="sys-head">
+    <div class="sys-num">01</div>
+    <div>
+      <h2>Competitor Intelligence</h2>
+      <div class="sys-model">Fills Zeely's biggest gap. Modelled on <b>Tiarna's competitor research</b> step and <b>Brandon's Reddit test</b>, with runtime as the evidence standard.</div>
+      <div class="sys-skills"><span class="tag tag-skill">Creative Diversity</span><span class="tag tag-skill">Neuromarketing</span><span class="tag tag-skill">Offer Positioning</span></div>
+    </div>
+  </div>
+  <div class="meta">
+    <div><div class="k">Trigger</div>New product, offer, or market. Quarterly refresh otherwise.</div>
+    <div><div class="k">Inputs</div>Product URL or one-paragraph description. Up to 5 known competitor names (optional).</div>
+    <div><div class="k">Owner</div>Media buyer. 2 hours.</div>
+  </div>
+  <div class="sys-body">
+    <div class="col">
+      <h3>Steps</h3>
+      <ol class="steps">
+        <li>List competitors that are <b>actively advertising right now</b>. A brand that isn't running ads teaches nothing about ads. <span class="theirs">Tiarna: Meta Ad Library</span> is the manual route.</li>
+        <li>Pull each competitor's active ads sorted by how long they've run. An ad at 60+ days is paying for itself; treat it as a proven concept.</li>
+        <li>Log every long-runner in the swipe file: hook type, format (static / UGC / talking-head / carousel / testimonial), offer, CTA, landing page type, and the <span class="theirs">Away From &amp; Towards</span> motivator it leans on.</li>
+        <li>Extract the 3 patterns that recur across competitors. These are the brief's <b>proven angles</b>.</li>
+        <li>Note what nobody is saying. Pick 2 as <b>differentiation angles</b>. Sanity-check the boldest one with the <span class="theirs">Reddit test</span>: post the hook anonymously and read the raw reaction before spending on it.</li>
+      </ol>
+      <div class="hook">
+        <div class="k">Connector hook</div>
+        With AdWhispr connected: <code>save_my_brand</code> → <code>find_competitors</code> (use only its verified advertisers) → <code>get_brand_ads</code> with <code>sortBy: longevity</code> → <code>generate_brief</code>. Without it: Meta Ad Library, filter to active, record the same fields by hand.
+      </div>
+    </div>
+    <div class="col">
+      <div class="rules">
+        <h3>Decision rules</h3>
+        <ul>
+          <li><b>30+ days</b> of runtime or it isn't evidence.</li>
+          <li><b>3 verified advertisers</b> minimum before you call anything a pattern. Fewer than 3? Widen to the adjacent niche.</li>
+          <li>Never brainstorm competitor names from memory. Verified advertisers only.</li>
+          <li>Swipe the <b>angle</b>, never the ad. Adapt to the niche per Tiarna.</li>
+        </ul>
+      </div>
+      <h3 style="margin-top:1.25rem">Outputs</h3>
+      <div class="outputs"><ul>
+        <li>Swipe file (table, one row per long-running ad)</li>
+        <li>Pattern summary (3 lines)</li>
+        <li>3 proven angles + 2 differentiation angles → into the Product Brief</li>
+      </ul></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SYSTEM 2 ============ -->
+<section class="sys" id="s2">
+  <div class="sys-head">
+    <div class="sys-num">02</div>
+    <div>
+      <h2>Product Intake</h2>
+      <div class="sys-model">Zeely's <b>Generate from Link</b>: paste a URL, get title, images, price, description. Here the brief also carries the avatar, the awareness level, and the offer stack, so every later system reads from one page.</div>
+      <div class="sys-skills"><span class="tag tag-skill">Customer Avatar</span><span class="tag tag-skill">Offer Creation</span></div>
+    </div>
+  </div>
+  <div class="meta">
+    <div><div class="k">Trigger</div>Any new product, offer, or campaign.</div>
+    <div><div class="k">Inputs</div>Product/offer URL or manual entry. System 01 angles.</div>
+    <div><div class="k">Owner</div>Strategist. 45 minutes.</div>
+  </div>
+  <div class="sys-body">
+    <div class="col">
+      <h3>Steps</h3>
+      <ol class="steps">
+        <li>Extract the basics: name, one-line description, price, 3–6 images, primary CTA.</li>
+        <li>Run the <span class="theirs">Avatar Speedrun</span>: what they're running <b>away from</b>, what they're running <b>towards</b>, and which <span class="theirs">tribe</span> they want to join or leave.</li>
+        <li>Place them on the <span class="theirs">awareness spectrum</span> (unaware → problem → solution → product → most aware). This decides how much the ad has to explain.</li>
+        <li>Write the <span class="theirs">Green Brain Roadmap</span> line: what it is → the result it delivers → the emotional effect of that result. This becomes the headline seed for every asset.</li>
+        <li>Choose <span class="theirs">Curious vs Committed</span> language based on sales capacity. Committed ("how my clients grow revenue") pulls hotter, fewer leads.</li>
+        <li>Attach the <span class="gapref">offer stack</span>: core outcome, vehicle, bonuses, guarantee, price anchor. The summit assumes the offer exists; the supplement's Module 01 builds it.</li>
+        <li>Set one conversion goal (traffic, leads, purchase) and flag any compliance category.</li>
+      </ol>
+    </div>
+    <div class="col">
+      <div class="rules">
+        <h3>Decision rules</h3>
+        <ul>
+          <li><b>One product per brief.</b> Multi-product URL → multiple briefs.</li>
+          <li>No price on the page → the goal is <b>leads</b>, not purchase.</li>
+          <li>Can't write the Green Brain line in one sentence → the offer isn't clear yet. Stop and finish Module 01.</li>
+          <li>Awareness level unknown → default to <b>problem-aware</b>; most Meta cold traffic sits there.</li>
+        </ul>
+      </div>
+      <h3 style="margin-top:1.25rem">Outputs</h3>
+      <div class="outputs"><ul>
+        <li>One-page Product Brief (template below)</li>
+        <li>Named by product; every downstream asset references it</li>
+      </ul></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SYSTEM 3 ============ -->
+<section class="sys" id="s3">
+  <div class="sys-head">
+    <div class="sys-num">03</div>
+    <div>
+      <h2>Creative Factory</h2>
+      <div class="sys-model">Zeely's <b>Creative Builder</b>, <b>Batch Mode</b> (up to 20 statics per run) and <b>Brand-Inspired Remix</b>. Concepts come from Tiarna's and Brandon's frameworks so the output doesn't read as generic AI.</div>
+      <div class="sys-skills"><span class="tag tag-skill">Ad Content Creation</span><span class="tag tag-skill">Creative Diversity</span><span class="tag tag-skill">Video &amp; Image Production</span></div>
+    </div>
+  </div>
+  <div class="meta">
+    <div><div class="k">Trigger</div>A completed Product Brief.</div>
+    <div><div class="k">Inputs</div>Brief; swipe file; brand kit (fonts, colours, no-logo rule); testimonial footage if any.</div>
+    <div><div class="k">Owner</div>Creative lead. One batch per week.</div>
+  </div>
+  <div class="sys-body">
+    <div class="col">
+      <h3>Steps</h3>
+      <ol class="steps">
+        <li>Run the <span class="theirs">Creative Diversity Roadmap</span>: audit what's live (how many <i>truly</i> unique concepts?), segment the brief's angles into <b>messaging pillars</b> (speed, trust, results, price…), then write <b>6–10 concepts per pillar</b>. Each concept has its own angle, script, visual, and copy.</li>
+        <li>Apply <span class="theirs">Camouflaging Ads</span> to every concept: no logo, no brand intro, no "Hi I'm X from Y". Open with the problem or the promise.</li>
+        <li><b>Batch statics.</b> Produce 10–20 per run, each in feed 1:1, story 9:16, landscape 1.91:1. Prefer <span class="theirs">carousels</span> where a story needs several beats: image simplicity with video's stopping power.</li>
+        <li><b>Remix</b> 2–3 long-runners from the swipe file with your product and voice. Angle, not artwork.</li>
+        <li><b>Video scripts</b> follow Tiarna's <span class="theirs">3-step script</span>: stop the right person scrolling → prove your point → tell them what to do next. Cold: 15–30s. Warm: 30–60s.</li>
+        <li>Every batch includes one <span class="theirs">Testimonial 2.0</span> piece (the 8-question interview, customer does the convincing) and one <span class="theirs">skepticism ad</span> ("you're probably thinking this won't work for you…").</li>
+        <li>Production is a <span class="gapref">partial gap</span>: scripting is taught, filming and editing aren't. Use the supplement's production stack (phone + ring light + CapCut) or the connector below.</li>
+      </ol>
+      <div class="hook">
+        <div class="k">Connector hook</div>
+        With OpenArt connected: <code>openart_generate_image</code> for static concepts and <code>openart_generate_video</code> for image-to-video and avatar-style clips, briefed with the concept sheet line by line. Without it: Canva for statics, CapCut for edits, customer-recorded testimonials for video.
+      </div>
+    </div>
+    <div class="col">
+      <div class="rules">
+        <h3>Decision rules</h3>
+        <ul>
+          <li><b>10–15 unique ads per ad set</b> at launch. The summit's floor, not Zeely's 1–3.</li>
+          <li>No two creatives share a hook. "Change the first sentence" and "swap the first 3 seconds" <b>don't count</b> as new concepts.</li>
+          <li>Logo in the first frame → rejected at review.</li>
+          <li>Every batch: ≥1 testimonial, ≥1 skepticism, ≥1 direct offer, ≥3 formats.</li>
+          <li>Silent-safe: every video reads with captions and no sound.</li>
+        </ul>
+      </div>
+      <h3 style="margin-top:1.25rem">Outputs</h3>
+      <div class="outputs"><ul>
+        <li>Concept sheet (pillar → concept → hook → format)</li>
+        <li>Creative Library rows: concept, format, hook, angle, sizes, status (draft / approved / live / retired)</li>
+      </ul></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SYSTEM 4 ============ -->
+<section class="sys" id="s4">
+  <div class="sys-head">
+    <div class="sys-num">04</div>
+    <div>
+      <h2>Copy Variants</h2>
+      <div class="sys-model">Zeely generates captions, headlines and primary text in sets. This runs Brandon's copy frameworks to do the same for Meta and Google, so voice stays yours.</div>
+      <div class="sys-skills"><span class="tag tag-skill">Copywriting</span><span class="tag tag-skill">Landing Page Copy</span></div>
+    </div>
+  </div>
+  <div class="meta">
+    <div><div class="k">Trigger</div>A creative reaches "approved" in the library.</div>
+    <div><div class="k">Inputs</div>Brief (Green Brain line, angles, language mode); the creative's hook.</div>
+    <div><div class="k">Owner</div>Copywriter. 30 minutes per creative.</div>
+  </div>
+  <div class="sys-body">
+    <div class="col">
+      <h3>Steps</h3>
+      <ol class="steps">
+        <li>Pick one of Brandon's three <span class="theirs">interchangeable structures</span> (Hook/Story/Offer, Hook/Body/CTA, Emotional/Logical/Emotional) and hold the <span class="theirs">Rule of One</span>: one idea, one promise, one emotion, one CTA.</li>
+        <li>Write 5 hooks using the <span class="theirs">Writing Hooks</span> rules: imply who it's for, imply who it's <i>not</i> for, open a loop you don't close.</li>
+        <li>Write 3 primary texts (short under 125 chars; medium with a line break after the hook; long story-led) using at least two of the <span class="theirs">6 proof tools</span>: urgency, scarcity, social proof, authority, familiar language, benefits over features.</li>
+        <li>Write 3 Meta headlines at ≤28 characters in Green Brain language, and 3 CTAs on the <span class="theirs">CTA formula</span>: action + emotional benefit.</li>
+        <li>For Google, build the RSA on the <span class="theirs">summit's headline structure</span>: H1 ×2–4 = service name; H2 ×2–4 = shortened hook/motivator; H3 ×2–4 = proof or offer; 2 descriptions.</li>
+        <li>Send every line through System 06 before it enters the library.</li>
+      </ol>
+    </div>
+    <div class="col">
+      <div class="rules">
+        <h3>Decision rules</h3>
+        <ul>
+          <li><b>Never one variant.</b> Each creative ships with ≥2 primary texts and ≥2 headlines.</li>
+          <li>Language mode comes from the brief: <b>Committed</b> when the sales team is at capacity, <b>Curious</b> when it needs volume.</li>
+          <li>"Click here to learn more" is banned as a CTA.</li>
+          <li>A hook that names the audience explicitly ("Attention Perth homeowners") gets rewritten as implied ("Sick of dodgy tradies?").</li>
+        </ul>
+      </div>
+      <h3 style="margin-top:1.25rem">Outputs</h3>
+      <div class="outputs"><ul>
+        <li>Copy set attached to each library row: 5 hooks, 3 primary texts, 3 headlines, 3 CTAs</li>
+        <li>Google RSA set per brief</li>
+      </ul></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SYSTEM 5 ============ -->
+<section class="sys" id="s5">
+  <div class="sys-head">
+    <div class="sys-num">05</div>
+    <div>
+      <h2>Campaign Launch</h2>
+      <div class="sys-model">Zeely's one-screen launch: goal, location, age/gender, and a budget it calculates for you. Here the budget comes from unit economics, the structure from Ciara's data hierarchy, and the timeline from the <b>3-Phase Ad Process</b>.</div>
+      <div class="sys-skills"><span class="tag tag-skill">Campaign Structure</span><span class="tag tag-skill">Ad Targeting</span><span class="tag tag-skill">Google Search</span><span class="tag tag-skill">Budget &amp; Unit Economics</span></div>
+    </div>
+  </div>
+  <div class="meta">
+    <div><div class="k">Trigger</div>10+ approved creatives with copy for one brief, and the sales page (07) live.</div>
+    <div><div class="k">Inputs</div>Brief; max allowable CPL / breakeven ROAS; audience lists by data tier.</div>
+    <div><div class="k">Owner</div>Media buyer. Launch day + 72h hands-off.</div>
+  </div>
+  <div class="sys-body">
+    <div class="col">
+      <h3>Steps</h3>
+      <ol class="steps">
+        <li><b>Objective</b> = the brief's goal. Conversion events per Brandon: one-step funnel tracks <i>Leads</i>; two-step tracks <i>Leads + Schedules</i>.</li>
+        <li><b>Budget</b> from the <span class="gapref">backwards budget</span> (supplement Module 02): revenue target → sales → calls → bookings → leads → daily spend = leads/day × max CPL. Floor: enough for ~50 conversion events a week per ad set.</li>
+        <li><b>Structure</b> per the <span class="gapref">3-layer hierarchy</span> and naming convention (Module 03): one campaign per objective; ad sets split by Ciara's <span class="theirs">data hierarchy</span>: cold (1% lookalike seeded from <i>closed sales</i>, plus broad), warm (page viewers, engagers), hot (form fills, bookings that didn't show). Different message per <span class="theirs">retargeting layer</span>.</li>
+        <li><b>Phase 1 settings</b> (<span class="theirs">Days 0–30, Data Gathering</span>): broad targeting, 10–15 creatives, automatic placements. You're buying information, not optimising.</li>
+        <li><b>Google</b>: run the <span class="theirs">brand campaign</span> regardless (exact + phrase only, low budget, high intent); competitors bidding on your name → immediately, otherwise minimal insurance budget. Non-brand search per Module 03's four campaign types.</li>
+        <li><b>Pre-launch checklist</b>: pixel fires, page loads on mobile under 3s, every link tested, compliance passed, <span class="theirs">UTMs</span> on every link (source, medium, campaign, content).</li>
+        <li>Submit. Log the tracker row with the hypothesis: "pain-hook pillar will beat $X CPL."</li>
+      </ol>
+      <div class="hook">
+        <div class="k">Connector hook</div>
+        With AdWhispr: <code>launch_meta_ad</code> / <code>launch_campaign</code> for Meta, <code>launch_search_campaign</code> or <code>launch_pmax_campaign</code> for Google, <code>launch_tiktok_campaign</code> to go past Zeely's Meta-only ceiling; <code>update_budget</code>, <code>pause_campaign</code>, <code>resume_campaign</code> for management. Without it: Ads Manager and Google Ads with the same settings.
+      </div>
+    </div>
+    <div class="col">
+      <div class="rules">
+        <h3>Decision rules</h3>
+        <ul>
+          <li><b>72 hours no-touch</b> after launch. Learning phase is not a signal.</li>
+          <li><b>Keep every ad running</b> in Phase 1. Budget concentrates on 1–2 winners naturally; never judge an ad set by its weakest ad (Brandon).</li>
+          <li>Scale winners <b>≤20% every 3–5 days</b>. Faster → duplicate at the higher budget instead.</li>
+          <li>Kill: <b>2× target CPA with zero conversions after 3 days</b>.</li>
+          <li>Phase 2 (day 30) opens optimisation; Phase 3 (day 60) opens lookalikes and new platforms. Not before.</li>
+          <li>Under $20K/month spend, don't buy advanced tracking. The CRM is the source of truth (Brandon).</li>
+        </ul>
+      </div>
+      <h3 style="margin-top:1.25rem">Outputs</h3>
+      <div class="outputs"><ul>
+        <li>Live campaign in the naming convention</li>
+        <li>Tracker row: launch date, budget, hypothesis, phase</li>
+        <li>Audience lists saved per data tier</li>
+      </ul></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SYSTEM 6 ============ -->
+<section class="sys" id="s6">
+  <div class="sys-head">
+    <div class="sys-num">06</div>
+    <div>
+      <h2>Compliance Gate</h2>
+      <div class="sys-model">Zeely's support team reviews every campaign against Meta's rules and checks links before it goes live. Make that a gate every asset passes, not a favour. The summit doesn't teach this; the supplement's Module 06 does.</div>
+      <div class="sys-skills"><span class="tag tag-skill">Ad Policy &amp; Compliance</span></div>
+    </div>
+  </div>
+  <div class="meta">
+    <div><div class="k">Trigger</div>Any creative or copy moving to "approved".</div>
+    <div><div class="k">Inputs</div>The asset; the five rejection triggers; the destination page.</div>
+    <div><div class="k">Owner</div>Whoever didn't write it. 10 minutes.</div>
+  </div>
+  <div class="sys-body">
+    <div class="col">
+      <h3>Steps</h3>
+      <ol class="steps">
+        <li>Scan for <b>personal-attribute callouts</b>: "you" + a personal problem in the same sentence. The summit's implied hooks are powerful here; keep them implied about the <i>situation</i>, not the <i>person</i>.</li>
+        <li>Scan for <b>before/after</b> implications in imagery and testimonial cuts. Testimonial 2.0 step 6 ("after state") is fine as story; not as a promised result.</li>
+        <li>Scan for <b>income, earnings, or specific-result claims</b> without substantiation.</li>
+        <li>Scan for <b>sensational or fear-based phrasing</b>. Skepticism ads pass; "your business is dying" doesn't.</li>
+        <li>Confirm the <b>landing page delivers what the ad promises</b>; free guide in the ad → no card wall on the page.</li>
+        <li>Check restricted categories (health, finance, housing, employment). Confirm the account has a backup ad account in the same Business Manager.</li>
+      </ol>
+    </div>
+    <div class="col">
+      <div class="rules">
+        <h3>Decision rules</h3>
+        <ul>
+          <li><b>Any flag → back to 03/04</b> with the line quoted and a compliant rewrite suggested. Nothing goes live with an open flag.</li>
+          <li>Rejected by the platform → <b>request manual review first</b>, edit second.</li>
+          <li>New ad account → first 2 weeks run only the plainest compliant ads to build history.</li>
+          <li>The writer never gates their own copy.</li>
+        </ul>
+      </div>
+      <h3 style="margin-top:1.25rem">Outputs</h3>
+      <div class="outputs"><ul>
+        <li>Pass/fail per asset with flagged lines and rewrites</li>
+        <li>Account health log (rejections, appeals, outcomes)</li>
+      </ul></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SYSTEM 7 ============ -->
+<section class="sys" id="s7">
+  <div class="sys-head">
+    <div class="sys-num">07</div>
+    <div>
+      <h2>Sales Page Generator</h2>
+      <div class="sys-model">Zeely builds an AI sales page with Stripe/PayPal for businesses with no store. Here the page is specced from the brief using Brandon's landing page rules and booking rules, so it converts to <i>shown</i> calls, not just clicks.</div>
+      <div class="sys-skills"><span class="tag tag-skill">Conversion Funnels</span><span class="tag tag-skill">Landing Page Optimisation</span><span class="tag tag-skill">Landing Page Copy</span><span class="tag tag-skill">Show Rates</span></div>
+    </div>
+  </div>
+  <div class="meta">
+    <div><div class="k">Trigger</div>A brief with no matching page. Built before 05 so tracking exists at launch.</div>
+    <div><div class="k">Inputs</div>Brief; offer stack; testimonial footage; calendar or payment provider.</div>
+    <div><div class="k">Owner</div>Funnel builder in GHL. 1 day.</div>
+  </div>
+  <div class="sys-body">
+    <div class="col">
+      <h3>Steps</h3>
+      <ol class="steps">
+        <li>Choose the funnel: <span class="theirs">one-step</span> (form → call) or <span class="theirs">two-step</span> (form → booking → call). Two-step when lead quality matters more than volume (the <span class="theirs">Quality vs Quantity seesaw</span>).</li>
+        <li>Above the fold on the <span class="theirs">Momentum principle</span>: Green Brain headline → Red Brain sub-headline → CTA. One hero (VSL or image). One trust element.</li>
+        <li>Body on <span class="theirs">Remove doubt &gt; increase desire</span>: they already clicked, so eliminate reasons to leave. <span class="theirs">FAQs mid-page</span>, not buried. Images below the VSL to cut cognitive load.</li>
+        <li>Offer block with the <span class="gapref">value stack</span> (Module 01): line items with values, total, price, guarantee directly beneath.</li>
+        <li>Proof block cut from Testimonial 2.0 interviews. Consistent branding with the ad: colour, tone, imagery match or trust breaks.</li>
+        <li>Booking per the <span class="theirs">Attendance &amp; Booking Rules</span>: today / tomorrow / day-after only; 15-minute slots; morning slots first (<span class="theirs">book calls before lunch</span>). Thank-you page with a next step.</li>
+        <li>Wire the <span class="theirs">Notificational Nurture</span>: confirmation → 24h → 1h → 30min reminders. Install <span class="theirs">Microsoft Clarity</span> for session recordings.</li>
+      </ol>
+    </div>
+    <div class="col">
+      <div class="rules">
+        <h3>Decision rules</h3>
+        <ul>
+          <li><b>One page per offer per audience</b> (Brandon: split LPs). No "all services" page.</li>
+          <li>Mobile designed first; desktop adapted.</li>
+          <li>Load time <b>&gt;3s → doesn't launch</b>. Speed kills sales.</li>
+          <li>Reduce text ruthlessly: if a section doesn't remove a doubt, cut it.</li>
+          <li>A website is not a landing page. Ads never land on the homepage.</li>
+        </ul>
+      </div>
+      <h3 style="margin-top:1.25rem">Outputs</h3>
+      <div class="outputs"><ul>
+        <li>Page spec, section by section, with copy</li>
+        <li>Live GHL page with pixel, UTM capture, calendar, reminder workflow</li>
+        <li>Clarity recording enabled</li>
+      </ul></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SYSTEM 8 ============ -->
+<section class="sys" id="s8">
+  <div class="sys-head">
+    <div class="sys-num">08</div>
+    <div>
+      <h2>Performance Loop</h2>
+      <div class="sys-model">Zeely tracks seven metrics, tells you to check daily for three days then two or three times a week, sort by ROAS and act on one or two suggestions. Same cadence, plus Patsy's lead tracker as the source of truth and thresholds Zeely leaves out.</div>
+      <div class="sys-skills"><span class="tag tag-skill">Reporting &amp; KPIs</span><span class="tag tag-skill">Lead Quality Tracking</span><span class="tag tag-skill">A/B Testing</span><span class="tag tag-skill">Retargeting</span></div>
+    </div>
+  </div>
+  <div class="meta">
+    <div><div class="k">Trigger</div>Any live campaign.</div>
+    <div><div class="k">Inputs</div>Platform metrics; lead tracker; CRM outcomes; unit economics targets.</div>
+    <div><div class="k">Owner</div>Media buyer daily, whole team Mondays.</div>
+  </div>
+  <div class="sys-body">
+    <div class="col">
+      <h3>Steps</h3>
+      <ol class="steps">
+        <li>Keep Patsy's <span class="theirs">lead tracker</span> live: every lead from click → form → booking → show → close, tagged by UTM. This, not the ad dashboard, says what's working.</li>
+        <li><b>Days 1–3</b>: one look per day, no changes. <b>Days 4–7</b>: one look, kill rules only. <b>Week 2+</b>: two or three looks a week.</li>
+        <li><b>Every Monday</b>: pull the week into the <span class="gapref">three-view dashboard</span> (Module 05: daily snapshot, weekly trend, monthly P&amp;L). Flag any metric that moved more than 20%. Decide. Execute by Friday. Log the change and its hypothesis.</li>
+        <li>Diagnose top-down with the threshold table below: CTR fine but CPL bad → the page or offer, not the ad.</li>
+        <li>Review <span class="theirs">lead quality weekly for the first 60 days</span>, then biweekly. Run Patsy's <span class="theirs">AI call transcript review</span> monthly: what do the closers say that the tyre-kickers don't? Feed it back into System 04.</li>
+        <li>Test on the summit's rules: GHL pages at a 50/50 split to significance (Sophie); Meta experiments one variable at a time with the minimum runtime (Ciara); Google experiments 30 days minimum.</li>
+        <li>Frequency past 3 or CTR down 30% from peak → creative refresh request to System 03.</li>
+      </ol>
+      <div class="hook">
+        <div class="k">Connector hook</div>
+        With AdWhispr: <code>get_account_performance</code> and <code>list_campaigns</code> for the Monday pull; <code>update_budget</code> and <code>pause_campaign</code> for the actions. Without it: platform exports into the three-tab Google Sheet.
+      </div>
+    </div>
+    <div class="col">
+      <div class="rules">
+        <h3>Decision rules</h3>
+        <ul>
+          <li><b>Max two changes per session.</b> Sort by CPL (lead gen) or ROAS (sales), act on the top one or two.</li>
+          <li><b>Show rate under 70%</b> → the leak is in nurture or booking, not the ads. Diagnose before scaling (Brandon).</li>
+          <li>Tracking is not truth post-iOS 14. <b>The CRM number wins</b> every disagreement.</li>
+          <li>No test is called before significance, and never on fewer than ~100 conversions per variant.</li>
+          <li>Never optimise for cheaper leads that don't close. Cost per <i>qualified</i> lead is the number.</li>
+        </ul>
+      </div>
+      <h3 style="margin-top:1.25rem">Outputs</h3>
+      <div class="outputs"><ul>
+        <li>Monday dashboard row</li>
+        <li>Change log with hypothesis and result</li>
+        <li>Creative refresh and copy refinement requests</li>
+      </ul></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SYSTEM 9 ============ -->
+<section class="sys" id="s9">
+  <div class="sys-head">
+    <div class="sys-num">09</div>
+    <div>
+      <h2>Organic Track</h2>
+      <div class="sys-model">Zeely's <b>Viral campaigns</b> schedule AI videos as Reels. Here Raj's organic system runs alongside paid: it pre-tests hooks, builds warm audiences, and turns proven posts into ads with the engagement showing.</div>
+      <div class="sys-skills"><span class="tag tag-skill">Ad Content Creation</span><span class="tag tag-skill">Retargeting</span></div>
+    </div>
+  </div>
+  <div class="meta">
+    <div><div class="k">Trigger</div>Every approved video in the library; standing weekly slot.</div>
+    <div><div class="k">Inputs</div>Creative Library; the 1–2 channels the audience actually lives on.</div>
+    <div><div class="k">Owner</div>Content lead. 2 hours a week.</div>
+  </div>
+  <div class="sys-body">
+    <div class="col">
+      <h3>Steps</h3>
+      <ol class="steps">
+        <li>Pick 1–2 channels and go deep (Raj: <span class="theirs">channel adoption</span>). Don't spread.</li>
+        <li>Post 1–2 times a week. Every post passes the <span class="theirs">3 E's</span>: educate, entertain, engage. The best do two.</li>
+        <li>Strip the offer-heavy CTA off paid creatives before posting them organically. Post each video 3–5 days before its paid run.</li>
+        <li>Log 24-hour organic metrics: views, watch-through, saves, shares.</li>
+        <li><span class="theirs">Reuse organic as ads</span>: anything in the top 20% for watch-through jumps the paid queue, with the engagement visible.</li>
+        <li>Build engager audiences from organic viewers; they're the lowest tier of Ciara's data hierarchy, but they're free.</li>
+      </ol>
+    </div>
+    <div class="col">
+      <div class="rules">
+        <h3>Decision rules</h3>
+        <ul>
+          <li><b>Consistency beats volume.</b> Miss a week → post the backlog, don't double up.</li>
+          <li>Top-20% watch-through → paid within 7 days.</li>
+          <li>Brand (organic) compounds; performance (paid) converts. Neither replaces the other. Both stay funded.</li>
+        </ul>
+      </div>
+      <h3 style="margin-top:1.25rem">Outputs</h3>
+      <div class="outputs"><ul>
+        <li>Organic calendar</li>
+        <li>Organic-to-paid promotion list</li>
+        <li>Engager audience (refreshed weekly)</li>
+      </ul></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TEMPLATES ============ -->
+<section class="sec" id="brief">
+  <h2>Product Brief template</h2>
+  <p class="lead">The one page every system reads. Copy it as-is into the client's workspace.</p>
+<pre class="block">PRODUCT BRIEF — [product / offer name]              <span class="c">rev [date]</span>
+
+Goal                 traffic | leads | purchase          <span class="c">(one only)</span>
+Funnel               one-step (form → call) | two-step (form → booking → call)
+Avatar               [name]  ·  awareness: unaware | problem | solution | product | most
+Away from            [the pain / fear / frustration]
+Towards              [the outcome / relief / aspiration]
+Tribe                joining: [ ]        leaving: [ ]
+Green Brain line     what it is → result it delivers → emotional effect of that result
+Language mode        curious | committed                 <span class="c">(from sales capacity)</span>
+
+OFFER STACK          <span class="c">(supplement Module 01)</span>
+  Outcome            before: [ ]  →  after: [ ]
+  Vehicle            [proprietary name]
+  Bonuses            1. [answers objection: ]  2. [ ]  3. [ ]
+  Guarantee          [type + exact wording]
+  Price / anchor     $[ ]  vs  $[ ] anchor
+
+ANGLES               <span class="c">(from System 01)</span>
+  Proven             1. [ ]  2. [ ]  3. [ ]
+  Differentiation    1. [ ]  2. [ ]
+
+Images               [links]
+CTA                  [action + emotional benefit]
+Compliance flags     health | finance | income | personal attributes | none
+Unit economics       max CPL $[ ]  ·  target CPA $[ ]  ·  breakeven ROAS [ ]x
+</pre>
+</section>
+
+<section class="sec" id="metrics">
+  <h2>Metric thresholds</h2>
+  <p class="lead">Zeely's seven metrics, plus hook rate and show rate from the summit. Each one diagnoses one layer; act only when its threshold trips.</p>
+  <div class="tbl-wrap">
+  <table>
+    <thead><tr><th>Metric</th><th>Layer it diagnoses</th><th>Act when</th><th>Send to</th></tr></thead>
+    <tbody>
+      <tr><td>Impressions</td><td>Delivery, audience size</td><td class="act">Under budget pace 2 days</td><td>05 · widen audience or raise bid</td></tr>
+      <tr><td>Hook rate (3s views ÷ impressions)</td><td>Video opening</td><td class="act">Below 25%</td><td>03 · new hooks</td></tr>
+      <tr><td>CTR</td><td>Creative appeal</td><td class="act">Below 1% cold, 1.5% warm</td><td>03 / 04</td></tr>
+      <tr><td>CPC</td><td>Audience efficiency</td><td class="act">50% above account average</td><td>05 · audience tier</td></tr>
+      <tr><td>Frequency</td><td>Fatigue</td><td class="act">Above 3 on cold</td><td>03 · refresh batch</td></tr>
+      <tr><td>Page conversion rate</td><td>Page + offer</td><td class="act">Below 20% lead magnet, 8% booking</td><td>07</td></tr>
+      <tr><td>CPL / CPA</td><td>Whole front end</td><td class="act">Above 2× target for 3 days</td><td>Diagnose top-down</td></tr>
+      <tr><td>Show rate</td><td>Nurture + booking</td><td class="act">Below 70%</td><td>07 · reminders, slot rules</td></tr>
+      <tr><td>Cost per qualified lead</td><td>Copy → quality</td><td class="act">Rising while CPL falls</td><td>04 · language mode</td></tr>
+      <tr><td>ROAS (blended, from CRM)</td><td>Revenue</td><td class="act">Below breakeven 7 days</td><td>Whole loop</td></tr>
+    </tbody>
+  </table>
+  </div>
+</section>
+
+<section class="sec" id="rollout">
+  <h2>First 30 days</h2>
+  <p class="lead">Stand the systems up in the order the summit itself implies: measure before you spend, build the page before the campaign.</p>
+  <div class="weeks">
+    <div class="wk"><div class="k">Week 1</div><div class="t">Foundations</div><ul>
+      <li>02 Product Brief for the first offer (finish Module 01 if the offer stack is blank)</li>
+      <li>08 Lead tracker + three-tab dashboard, empty</li>
+      <li>06 Compliance gate assigned to a non-writer</li>
+      <li>Unit economics: max CPL, breakeven ROAS</li>
+    </ul></div>
+    <div class="wk"><div class="k">Week 2</div><div class="t">Research &amp; creative</div><ul>
+      <li>01 Competitor intel; swipe file; Reddit-test one hook</li>
+      <li>03 First batch: 10–15 concepts across 3 pillars</li>
+      <li>04 Copy sets; everything through 06</li>
+    </ul></div>
+    <div class="wk"><div class="k">Week 3</div><div class="t">Page &amp; launch</div><ul>
+      <li>07 Page live with pixel, UTMs, calendar, reminder cadence, Clarity</li>
+      <li>05 Launch in Phase 1 settings; Google brand campaign on</li>
+      <li>72-hour no-touch</li>
+    </ul></div>
+    <div class="wk"><div class="k">Week 4</div><div class="t">Loop &amp; organic</div><ul>
+      <li>08 First Monday pull; kill rules only</li>
+      <li>09 Organic calendar starts; first engager audience</li>
+      <li>Retargeting layers on warm/hot tiers</li>
+      <li>Day 30: Phase 2 opens</li>
+    </ul></div>
+  </div>
+</section>
+
+<section class="sec" id="downstream">
+  <h2>Downstream systems already in the playbook</h2>
+  <p class="lead">These run after a lead exists and are already fully specified by the summit. Wire them once; the nine systems above feed them.</p>
+  <div class="down">
+    <div class="d"><b>Nurture (Team)</b>Three sequences with distinct jobs: <span class="theirs">Notificational</span> (transactional), <span class="theirs">Lead Nurture</span> (emotional, booking-focused, GHL logic branching and custom values), <span class="theirs">Sales Nurture</span> (logical, case studies and ROI for booked leads). Position each on the awareness spectrum. Email infrastructure is a <span class="gapref">gap</span>: authenticate the domain and warm it (Module 04) before any sequence goes live.</div>
+    <div class="d"><b>Show rates &amp; reps (Brandon)</b>Target 70% show rate. Morning slots. Hire reps through Meta lead ads; interview with mock calls and ethics tests. Scaling playbook when capacity, not leads, is the constraint.</div>
+    <div class="d"><b>Post-sale (gap)</b>The summit's funnel ends at the sale. Supplement Module 07 adds the 7-day onboarding, the 3-trigger referral ask, review generation cut from Testimonial 2.0 interviews, and the entry → core → premium upsell path. Referrals are the only leads with a zero CPL; they belong in the tracker too.</div>
+  </div>
+</section>
+
+</main>
+</div>
+
+<footer class="foot"><b>Where U? Summit</b> · Execution Systems · Companion to the Playbook, Gap Analysis and Training Supplement · Modelled on Zeely's product-link-to-ROAS pipeline</footer>
